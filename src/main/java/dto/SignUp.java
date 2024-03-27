@@ -6,5 +6,5 @@ import lombok.Data;
 public class SignUp{
     private String id;
     private String name;
-    privaten
+    private String password;
 }
