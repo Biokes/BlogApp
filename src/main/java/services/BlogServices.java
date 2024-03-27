@@ -1,4 +1,7 @@
 package services;
 
-public class BlogServices{
+import dto.SignUp;
+
+public interface BlogServices{
+    void signUp(SignUp signUp);
 }
