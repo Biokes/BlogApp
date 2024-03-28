@@ -9,9 +9,9 @@ import static org.junit.Assert.assertEquals;
 
 @DataMongoTest
 public class RepositoryTest{
-    @Autowired
-    private UserRepository userRepository;
-    @Test
+@Autowired
+private UserRepository userRepository;
+@Test
     public void saveUser_testUserIsSaved(){
         User nweUser = new User();
         userRepository.save(nweUser);
