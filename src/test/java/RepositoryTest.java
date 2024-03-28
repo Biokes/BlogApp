@@ -1,6 +1,6 @@
 
-import data.model.User;
-import data.repositories.UserRepository;
+import blogPack.data.model.User;
+import blogPack.data.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;

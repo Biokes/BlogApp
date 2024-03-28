@@ -1,4 +1,4 @@
-package contoller;
+package blogPack.contoller;
 
 
 import org.springframework.web.bind.annotation.RestController;

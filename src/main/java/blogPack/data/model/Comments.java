@@ -1,4 +1,4 @@
-package data.model;
+package blogPack.data.model;
 
 import lombok.Data;
 @Data

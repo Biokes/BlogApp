@@ -1,7 +1,6 @@
-package data.repositories;
+package blogPack.data.repositories;
 
-import data.model.Comments;
-import data.model.Post;
+import blogPack.data.model.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
