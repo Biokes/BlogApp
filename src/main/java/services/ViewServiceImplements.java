@@ -3,5 +3,5 @@ package services;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ViewServices{
+public class ViewServiceImplements implements ViewService{
 }
