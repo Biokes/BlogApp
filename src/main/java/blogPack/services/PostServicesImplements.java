@@ -22,6 +22,11 @@ public class PostServicesImplements implements PostServices{
         postRepositpory.save(post);
     }
 
+    @Override
+    public void deleteAll(){
+        postRepositpory.deleteAll();
+    }
+
 //    @Override
 //    public void deletePost(DeletePostRequest deletePostRequest){
 //        List<Post> allPost = postRepositpory.findAll();
