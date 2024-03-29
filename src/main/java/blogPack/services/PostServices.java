@@ -10,5 +10,5 @@ public interface PostServices{
 
     void save(Post post);
 
-    void deletePost(DeletePostRequest deletePostRequest);
+//    void deletePost(DeletePostRequest deletePostRequest);
 }
