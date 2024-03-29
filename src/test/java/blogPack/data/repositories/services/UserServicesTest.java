@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class UserServicesTest{
@@ -21,6 +21,6 @@ public class UserServicesTest{
         request.setLastName("LastName");
         request.setPassword("my password");
         userServices.createUser(request);
-        assertTrue(userServices.count()==1);
+        assertEquals(1,userServices.count());
     }
 }
