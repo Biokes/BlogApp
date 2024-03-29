@@ -1,6 +1,5 @@
 package blogPack.data.repositories.services;
 
-import blogPack.data.model.User;
 import blogPack.dto.RegisterRequest;
 import blogPack.services.UserServices;
 import org.junit.jupiter.api.Test;
@@ -22,5 +21,9 @@ public class UserServicesTest{
         request.setPassword("my password");
         userServices.createUser(request);
         assertEquals(1,userServices.count());
+    }
+    @Test
+    void deleteUser_testUserIsDeleted(){
+
     }
 }
