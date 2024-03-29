@@ -12,5 +12,7 @@ public interface PostServices{
 
     void deleteAll();
 
+    void deletePost(DeletePostRequest deletePostRequest);
+
 //    void deletePost(DeletePostRequest deletePostRequest);
 }

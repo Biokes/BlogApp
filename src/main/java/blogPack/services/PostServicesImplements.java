@@ -26,16 +26,15 @@ public class PostServicesImplements implements PostServices{
     public void deleteAll(){
         postRepositpory.deleteAll();
     }
+    @Override
+    public void deletePost(DeletePostRequest deletePostRequest){
+        for(Post post : postRepositpory.findAll()){
+            if( post.getTitle().equalsIgnoreCase(deletePostRequest.getPostTitle( )) )
+                if( post.getPoster( ).equalsIgnoreCase(deletePostRequest.getGetPosterUserName( )) ){
+                    postRepositpory.delete(post);
+                    return;
+                }
+            }
 
-//    @Override
-//    public void deletePost(DeletePostRequest deletePostRequest){
-//        List<Post> allPost = postRepositpory.findAll();
-//        for(Post post: allPost){
-//            if(post.getTitle().equalsIgnoreCase(deletePostRequest.getPostTitle( )))
-//                if(post.getPoster().equalsIgnoreCase(deletePostRequest.getUserName())){
-//                    postRepositpory.delete(post);
-//                    return;
-//                }
-
-
+        }
 }
