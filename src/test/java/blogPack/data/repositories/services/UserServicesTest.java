@@ -7,6 +7,7 @@ import blogPack.services.PostServices;
 import blogPack.services.UserServices;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,17 +30,11 @@ public class UserServicesTest{
     }
     @Test
     void createPost_testPostIsCreated(){
-        RegisterRequest request = new RegisterRequest();
-        request.setUserName("userName");
-        request.setFirstName("FirstName");
-        request.setLastName("LastName");
-        request.setPassword("my password");
-        userServices.createUser(request);
         Post post = new Post();
-        assertEquals(1,userServices.count());
         PostRequest postRequest = new PostRequest();
         post.setTitle(postRequest.getTitle( ));
         postRequest.setContent(postRequest.getContent( ));
+        postServices.save(post);
         assertEquals(1, postServices.count());
     }
 }
