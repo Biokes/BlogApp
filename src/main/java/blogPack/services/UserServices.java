@@ -10,4 +10,6 @@ public interface UserServices{
 
     long count();
 
+//    void deleteUser(String userName);
+
 }

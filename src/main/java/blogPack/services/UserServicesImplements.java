@@ -20,4 +20,9 @@ public class UserServicesImplements implements UserServices{
     public long count(){
         return userRepository.count( );
     }
+
+//    @Override
+//    public void deleteUser(String userName){
+//        userRepository.deley
+//    }
 }
