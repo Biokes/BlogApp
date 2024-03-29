@@ -14,7 +14,6 @@ public class PostServicesImplements implements PostServices{
     public long count(){
         return postRepositpory.count( );
     }
-
     @Override
     public void save(Post post){
         postRepositpory.save(post);
