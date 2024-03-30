@@ -22,7 +22,6 @@ public class CommentServicesImplements  implements CommentServices{
         Mappers.mapComment(comment, commentRequest);
         commentRepository.save(comment);
     }
-
     @Override
     public void deleteAll(){
         commentRepository.deleteAll();
