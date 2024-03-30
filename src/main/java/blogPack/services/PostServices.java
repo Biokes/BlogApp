@@ -1,6 +1,7 @@
 package blogPack.services;
 
 import blogPack.data.model.Post;
+import blogPack.dto.CommentRequest;
 import blogPack.dto.DeletePostRequest;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ public interface PostServices{
     void deleteAll();
 
     void deletePost(DeletePostRequest deletePostRequest);
+
+    void addCommentToPost(CommentRequest commentRequest);
 
 //    void deletePost(DeletePostRequest deletePostRequest);
 }

@@ -4,6 +4,7 @@ import blogPack.data.model.Comment;
 import blogPack.data.repositories.CommentRepository;
 import blogPack.dto.CommentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mapping.MappingException;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 

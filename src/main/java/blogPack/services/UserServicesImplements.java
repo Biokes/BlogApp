@@ -3,6 +3,7 @@ package blogPack.services;
 import blogPack.data.model.Comment;
 import blogPack.data.model.User;
 import blogPack.data.repositories.CommentRepository;
+import blogPack.data.repositories.PostRepositpory;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
@@ -14,6 +15,8 @@ import utilities.Mappers;
 public class UserServicesImplements implements UserServices{
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PostServices postServices;
     @Autowired
     private CommentServices commentServices;
     @Override
@@ -28,7 +31,8 @@ public class UserServicesImplements implements UserServices{
 
     @Override
     public void commentOnPost(CommentRequest commentRequest){
-        commentServices.save(commentRequest);
+        postServices.addCommentToPost(commentRequest);
+//        commentServices.save(commentRequest);
     }
 
     @Override
