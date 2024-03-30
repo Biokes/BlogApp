@@ -8,6 +8,7 @@ import blogPack.dto.RegisterRequest;
 import blogPack.services.CommentServices;
 import blogPack.services.PostServices;
 import blogPack.services.UserServices;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,12 @@ public class UserServicesTest{
     private PostServices postServices;
     @Autowired
     private CommentServices commentServices;
+    @BeforeEach
+    void wipe(){
+        postServices.deleteAll( );
+        userServices.deleteAll();
+        commentServices.deleteAll();
+    }
     @Test
     void createUser_testUserIsCreated(){
         RegisterRequest request = new RegisterRequest();

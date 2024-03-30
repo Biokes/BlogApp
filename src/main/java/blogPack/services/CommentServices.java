@@ -10,4 +10,5 @@ public interface CommentServices{
     long countNumberOfComments();
 
     void save(CommentRequest commentRequest);
+    void deleteAll();
 }

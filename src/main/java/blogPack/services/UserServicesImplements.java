@@ -30,4 +30,9 @@ public class UserServicesImplements implements UserServices{
     public void commentOnPost(CommentRequest commentRequest){
         commentServices.save(commentRequest);
     }
+
+    @Override
+    public void deleteAll(){
+        userRepository.deleteAll();
+    }
 }

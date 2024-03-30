@@ -13,6 +13,8 @@ public interface UserServices{
 
     void commentOnPost(CommentRequest commentRequest);
 
+    void deleteAll();
+
 
 //    void deleteUser(String userName);
 
