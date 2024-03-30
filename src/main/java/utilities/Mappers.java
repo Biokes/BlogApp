@@ -1,6 +1,8 @@
 package utilities;
 
+import blogPack.data.model.Comment;
 import blogPack.data.model.User;
+import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
 
 public class Mappers{
@@ -10,5 +12,9 @@ public class Mappers{
         userToBeCreated.setFirstName(registerRequest.getFirstName());
         userToBeCreated.setLastName(registerRequest.getLastName( ));
         return userToBeCreated;
+    }
+    public static void mapComment(Comment comment, CommentRequest commentRequest){
+        comment.setCommenter(commentRequest.getCommenterName( ));
+        comment.setCommentBody(commentRequest.getCommentBody( ));
     }
 }

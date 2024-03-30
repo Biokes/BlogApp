@@ -2,7 +2,6 @@ package blogPack.data.repositories.services;
 
 import blogPack.data.model.Comment;
 import blogPack.data.model.Post;
-import blogPack.data.model.User;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.DeletePostRequest;
 import blogPack.dto.PostRequest;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import utilities.Mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -76,5 +76,7 @@ public class PostservicesTest{
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice");
         comment.setCommenter("userName");
+        Mappers.mapComment(comment, commentRequest);
+
     }
 }
