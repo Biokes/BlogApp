@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface PostRepositpory extends MongoRepository<Post, String>{
-    List<Post> findAllPostByUserName(String posterName);
+    List<Post> findPostsByPoster(String posterName);
 }
