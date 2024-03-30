@@ -12,7 +12,7 @@ public class Comment{
     @Id
     private String id;
     @DBRef
-    private User commenter;
+    private String commenter;
     private String commentBody;
     private LocalDateTime timeOfComment;
 }

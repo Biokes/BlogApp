@@ -74,5 +74,7 @@ public class PostservicesTest{
         assertEquals(1, postServices.count());
         Comment comment = new Comment();
         CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice");
+        comment.setCommenter("userName");
     }
 }
