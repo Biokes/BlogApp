@@ -47,7 +47,7 @@ public class UserServicesTest{
         request.setUserName("new");
         request.setLastName("newlastName");
         request.setPassword("pass101");
-        userServices.createUser(request);
+        user = userServices.createUser(request);
         Post post = new Post();
         PostRequest postRequest = new PostRequest();
         post.setPoster("userName");
