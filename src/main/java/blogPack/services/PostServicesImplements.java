@@ -14,7 +14,7 @@ public class PostServicesImplements implements PostServices{
     @Autowired
     private PostRepositpory postRepositpory;
     @Override
-    public long count(){
+    public long countNumberOfPosts(){
         return postRepositpory.count( );
     }
     @Override

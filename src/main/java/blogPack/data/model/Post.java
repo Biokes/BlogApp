@@ -18,7 +18,7 @@ public class Post{
     private String content;
     private LocalDate dateCreated;
     @DBRef
-    private List<Comments> postComments;
+    private List<Comment> postComments;
     @DBRef
     private List<Views> views;
 }

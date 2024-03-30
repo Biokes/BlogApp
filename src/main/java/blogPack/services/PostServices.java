@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PostServices{
-    long count();
+    long countNumberOfPosts();
 
     void save(Post post);
 

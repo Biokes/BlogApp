@@ -1,7 +1,10 @@
 package blogPack.services;
 
+import blogPack.data.model.Comment;
 import blogPack.data.model.User;
+import blogPack.data.repositories.CommentRepository;
 import blogPack.data.repositories.UserRepository;
+import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +14,20 @@ import utilities.Mappers;
 public class UserServicesImplements implements UserServices{
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CommentServices commentServices;
     @Override
     public void createUser(RegisterRequest registerRequest){
         User user = new User();
         userRepository.save(Mappers.mapRegister(user, registerRequest));
     }
     @Override
-    public long count(){
+    public long countNumberOfUsers(){
         return userRepository.count( );
     }
 
-//    @Override
-//    public void deleteUser(String userName){
-//        userRepository.deley
-//    }
+    @Override
+    public void commentOnPost(CommentRequest commentRequest){
+        commentServices.save(commentRequest);
+    }
 }

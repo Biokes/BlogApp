@@ -14,5 +14,6 @@ public class Comment{
     @DBRef
     private String commenter;
     private String commentBody;
+    private String postTitle;
     private LocalDateTime timeOfComment;
 }

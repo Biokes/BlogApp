@@ -6,4 +6,5 @@ import lombok.Data;
 public class CommentRequest{
     private String commentBody;
     private String commenterName;
+    private String postTitle;
 }
