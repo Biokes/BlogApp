@@ -5,6 +5,8 @@ import blogPack.data.model.User;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
 
+import java.time.LocalDateTime;
+
 public class Mappers{
     public static User mapRegister(User userToBeCreated, RegisterRequest registerRequest){
         userToBeCreated.setUserName(registerRequest.getUserName( ));
@@ -16,5 +18,7 @@ public class Mappers{
     public static void mapComment(Comment comment, CommentRequest commentRequest){
         comment.setCommenter(commentRequest.getCommenterName( ));
         comment.setCommentBody(commentRequest.getCommentBody( ));
+        comment.setTimeOfComment(LocalDateTime.now( ));
+        comment.setPostTitle(commentRequest.getPostTitle( ));
     }
 }

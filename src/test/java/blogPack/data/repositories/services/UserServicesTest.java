@@ -54,6 +54,7 @@ public class UserServicesTest{
         commentRequest.setCommentBody("nice");
         commentRequest.setCommenterName("userName");
         commentRequest.setPostTitle("post Title.");
+        commentRequest.setPosterName("userName");
         RegisterRequest request= new RegisterRequest();
         request.setUserName("userName");
         request.setFirstName("FirstName");
