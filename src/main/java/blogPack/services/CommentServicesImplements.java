@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
 @Service
-public class CommentSevicesImplements  implements CommentServices{
+public class CommentServicesImplements  implements CommentServices{
     @Autowired
     private CommentRepository commentRepository;
     @Override
