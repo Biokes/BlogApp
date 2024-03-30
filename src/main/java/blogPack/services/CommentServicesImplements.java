@@ -15,8 +15,6 @@ public class CommentServicesImplements  implements CommentServices{
     public long countNumberOfComments(){
         return commentRepository.count();
     }
-
-    @Override
     public void save(CommentRequest commentRequest){
         Comment comment= new Comment();
         Mappers.mapComment(comment, commentRequest);
