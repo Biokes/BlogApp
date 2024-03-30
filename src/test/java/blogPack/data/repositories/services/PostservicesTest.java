@@ -72,6 +72,6 @@ public class PostservicesTest{
         postServices.save(post);
         assertEquals(1, postServices.count());
         Comment comment = new Comment();
-
+        CommentRequest commentRequest = new CommentRequest();
     }
 }
