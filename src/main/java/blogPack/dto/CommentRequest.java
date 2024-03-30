@@ -1,11 +1,12 @@
 package blogPack.dto;
 
+import blogPack.data.model.User;
 import lombok.Data;
 
 @Data
 public class CommentRequest{
     private String commentBody;
-    private String commenterName;
+    private User commenter;
     private String postTitle;
     private String posterName;
 }

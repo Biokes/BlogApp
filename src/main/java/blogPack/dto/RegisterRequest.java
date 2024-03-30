@@ -2,7 +2,7 @@ package blogPack.dto;
 
 import lombok.Data;
 
-@Data
+    @Data
 public class RegisterRequest{
     private String UserName;
     private String firstName;

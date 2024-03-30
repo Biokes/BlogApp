@@ -20,9 +20,10 @@ public class UserServicesImplements implements UserServices{
     @Autowired
     private CommentServices commentServices;
     @Override
-    public void createUser(RegisterRequest registerRequest){
+    public User createUser(RegisterRequest registerRequest){
         User user = new User();
         userRepository.save(Mappers.mapRegister(user, registerRequest));
+        return user;
     }
     @Override
     public long countNumberOfUsers(){
@@ -30,7 +31,7 @@ public class UserServicesImplements implements UserServices{
     }
 
     @Override
-    public void commentOnPost(CommentRequest commentRequest){
+    public void addCommentToPost(CommentRequest commentRequest){
         postServices.addCommentToPost(commentRequest);
 //        commentServices.save(commentRequest);
     }

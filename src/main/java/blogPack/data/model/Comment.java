@@ -7,12 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Data
-@Document("Comment")
+@Document("Comments")
 public class Comment{
     @Id
     private String id;
+
     @DBRef
-    private String commenter;
+    private User commenter;
     private String commentBody;
     private String postTitle;
     private LocalDateTime timeOfComment;

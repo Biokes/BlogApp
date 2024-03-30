@@ -16,7 +16,7 @@ public class Mappers{
         return userToBeCreated;
     }
     public static void mapComment(Comment comment, CommentRequest commentRequest){
-        comment.setCommenter(commentRequest.getCommenterName( ));
+        comment.setCommenter(commentRequest.getCommenter());
         comment.setCommentBody(commentRequest.getCommentBody( ));
         comment.setTimeOfComment(LocalDateTime.now( ));
         comment.setPostTitle(commentRequest.getPostTitle( ));

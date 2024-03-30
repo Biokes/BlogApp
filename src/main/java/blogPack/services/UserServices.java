@@ -1,13 +1,14 @@
 package blogPack.services;
 
+import blogPack.data.model.User;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface UserServices{
-    void createUser(RegisterRequest registerRequest);
+    User createUser(RegisterRequest registerRequest);
     long countNumberOfUsers();
-    void commentOnPost(CommentRequest commentRequest);
+    void addCommentToPost(CommentRequest commentRequest);
     void deleteAll();
 }
