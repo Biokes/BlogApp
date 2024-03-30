@@ -41,7 +41,7 @@ public class UserServicesTest{
     }
     @Test
     void commentOnPost_testPostIsCommenetedOn(){
-        User user = new User();
+        User user;
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -71,4 +71,6 @@ public class UserServicesTest{
         userServices.addCommentToPost(commentRequest);
         assertEquals(1, commentServices.countNumberOfComments());
     }
+    @Test
+    void comentPostThats_notCreatedThroewsException(){}
 }
