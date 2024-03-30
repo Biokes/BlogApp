@@ -1,19 +1,18 @@
 package blogPack.services;
 
-import blogPack.data.model.Comment;
 import blogPack.data.model.Post;
 import blogPack.data.repositories.PostRepositpory;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.DeletePostRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utilities.Mappers;
+import utilities.exception.InvalidPostException;
 
 import java.util.List;
 
 @Service
 
-public class PostServicesImplements implements PostServices{
+public class BlogPostService implements PostServices{
     @Autowired
     private PostRepositpory postRepositpory;
     @Autowired
@@ -43,6 +42,14 @@ public class PostServicesImplements implements PostServices{
         }
     @Override
     public void addCommentToPost(CommentRequest commentRequest){
-        commentServices.save(commentRequest);
+        List<Post> posterList = postRepositpory.findAllPostByUserName(commentRequest.getPosterName());
+        for(Post post : posterList){
+            if (post.getTitle().equalsIgnoreCase(commentRequest.getPostTitle( ))){
+                commentServices.save(commentRequest);
+                return;
+            }
+        }
+        throw new InvalidPostException();
+
     }
 }

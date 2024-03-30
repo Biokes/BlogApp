@@ -12,8 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import utilities.exception.InvalidPostException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class UserServicesTest{
@@ -72,5 +74,20 @@ public class UserServicesTest{
         assertEquals(1, commentServices.countNumberOfComments());
     }
     @Test
-    void comentPostThats_notCreatedThroewsException(){}
+    void comentPostThats_notCreatedThroewsException(){
+        User user;
+        RegisterRequest request= new RegisterRequest();
+        request.setFirstName("newUser");
+        request.setUserName("new");
+        request.setLastName("newlastName");
+        request.setPassword("pass101");
+        user = userServices.createUser(request);
+        CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice");
+        commentRequest.setCommenter(user);
+        commentRequest.setPostTitle("post Title.");
+        commentRequest.setPosterName("userName");
+        assertEquals(0, commentServices.countNumberOfComments());
+        assertThrows(InvalidPostException.class, ()->userServices.addCommentToPost(commentRequest));
+    }
 }
