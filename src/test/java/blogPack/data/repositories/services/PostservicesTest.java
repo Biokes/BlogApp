@@ -43,7 +43,7 @@ public class PostservicesTest{
         postServices.save(post2);
         assertEquals(3, postServices.countNumberOfPosts());
     }
-        @Test
+    @Test
     void deletePost_testPostIsDeleted(){
         Post post = new Post();
         PostRequest postRequest = new PostRequest();
