@@ -3,6 +3,7 @@ package blogPack.data.repositories.services;
 import blogPack.data.model.Comment;
 import blogPack.data.model.Post;
 import blogPack.data.model.User;
+import blogPack.dto.CommentRequest;
 import blogPack.dto.DeletePostRequest;
 import blogPack.dto.PostRequest;
 import blogPack.services.PostServices;
