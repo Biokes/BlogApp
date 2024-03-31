@@ -108,13 +108,9 @@ public class UserServicesTest{
         postRequest.setContent(postRequest.getContent( ));
         postServices.save(post);
         assertEquals(1, postServices.countNumberOfPosts());
-        CommentRequest commentRequest = new CommentRequest();
-        commentRequest.setCommentBody("nice");
-        commentRequest.setCommenter(user);
-        commentRequest.setPostTitle("post Title.");
-        commentRequest.setPosterName("userName");
+        postServices.viewPostWith(post);
     }
-    //view post thtat is not created yet to throw exception
+    //view post that is not created yet to throw exception
     // create a post with userName that does not exist
     //update post
     //delete post

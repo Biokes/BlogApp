@@ -4,6 +4,7 @@ import blogPack.data.model.Post;
 import blogPack.data.repositories.PostRepositpory;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.DeletePostRequest;
+import blogPack.dto.ViewRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.exception.InvalidPostException;
@@ -45,6 +46,10 @@ public class BlogPostService implements PostServices{
             }
         }
         throw new InvalidPostException();
+
+    }
+    @Override
+    public void viewPostWith(ViewRequest viewRequest){
 
     }
 }
