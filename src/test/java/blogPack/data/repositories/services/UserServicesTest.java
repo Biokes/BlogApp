@@ -42,13 +42,12 @@ public class UserServicesTest{
     }
     @Test
     void commentOnPost_testPostIsCommentedOn(){
-        User user;
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
         request.setLastName("newLastName");
         request.setPassword("pass101");
-        user = userServices.createUser(request);
+        userServices.createUser(request);
         Post post = new Post();
         PostRequest postRequest = new PostRequest();
         post.setPoster("userName");
@@ -59,7 +58,7 @@ public class UserServicesTest{
         assertEquals(1, postServices.countNumberOfPosts());
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice");
-        commentRequest.setCommenter(user);
+        commentRequest.setCommenterUsername("new");
         commentRequest.setPostTitle("post Title.");
         commentRequest.setPosterName("userName");
         RegisterRequest request1= new RegisterRequest();
@@ -84,7 +83,7 @@ public class UserServicesTest{
         assertEquals(1, userServices.countNumberOfUsers());
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice");
-        commentRequest.setCommenter(user);
+        commentRequest.setCommenterUsername("new");
         commentRequest.setPostTitle("post Title.");
         commentRequest.setPosterName("userName");
         assertEquals(0, commentServices.countNumberOfComments());

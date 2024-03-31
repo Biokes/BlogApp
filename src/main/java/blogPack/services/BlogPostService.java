@@ -58,9 +58,14 @@ public class BlogPostService implements PostServices{
 
     @Override
     public Post findPostBy(String postTitle){
-        Post post = postRepositpory.findPostByTitle(postTitle);
-        if(post == null)
-            throw new PostDoesNotExistException();
-        return post;
+        Post foundPost = new Post();
+        List<Post> postList = postRepositpory.findAll();
+        for(Post post : postList)
+            if(post.getTitle().equalsIgnoreCase(postTitle)){
+                foundPost = post;
+                break;
+            }
+        if(foundPost == null) throw new PostDoesNotExistException();
+        return foundPost;
     }
 }
