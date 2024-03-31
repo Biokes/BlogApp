@@ -85,7 +85,7 @@ public class UserServicesTest{
         commentRequest.setCommenterUsername("new");
         commentRequest.setPostTitle("post Title.");
         commentRequest.setPosterName("userName");
-        assertEquals(0, commentServices.countNumberOfComments());
+        assertEquals(0, postServices.countNumberOfPosts());
         assertThrows(PostDoesNotExistException.class, ()->userServices.addCommentToPost(commentRequest));
     }
     @Test

@@ -33,8 +33,7 @@ public class UserServicesImplements implements UserServices{
         return userRepository.count( );
     }
     public void addCommentToPost(CommentRequest commentRequest){
-        Post post = postServices.findPostBy(commentRequest.getPostTitle());
-        validatePost(post);
+        postServices.findPostBy(commentRequest.getPostTitle());
         saveComment(commentRequest);
     }
     public void deleteAll(){
@@ -56,10 +55,6 @@ public class UserServicesImplements implements UserServices{
             throw new NoPostMatchException();
         }
         viewService.viewWith(viewRequest, userGotten);
-    }
-    private void validatePost(Post post){
-        if(post == null )
-            throw new PostDoesNotExistException();
     }
     private void validateComment(CommentRequest commentRequest){
         User commenter = findUserBy(commentRequest.getCommenterUsername( ));

@@ -16,8 +16,6 @@ import java.util.List;
 public class BlogPostService implements PostServices{
     @Autowired
     private PostRepositpory postRepositpory;
-//    @Autowired
-//    private ViewService viewService;
     public long countNumberOfPosts(){
         return postRepositpory.count( );
     }
@@ -37,31 +35,11 @@ public class BlogPostService implements PostServices{
             }
 
         }
-//    public void addCommentToPost(CommentRequest commentRequest){
-//        List<Post> posterList = postRepositpory.findPostsByPoster(commentRequest.getPosterName());
-//        for(Post post : posterList){
-//            if (post.getTitle().equalsIgnoreCase(commentRequest.getPostTitle( ))){
-//                commentServices.save(commentRequest);
-//                return;
-//            }
-//        }
-//        throw new PostDoesNotExistException();
-//
-//    }
-//    public void viewPostWith(ViewRequest viewRequest){
-//        viewService.viewWith(viewRequest);
-//    }
-//    @Override
-//    public long countViews(ViewsCountRequest viewCountRequest){
-//        return viewService.countViewsWith(viewCountRequest);
-//    }
-
     @Override
     public Post findPostBy(String postTitle){
         Post foundPost = new Post();
         List<Post> postList = postRepositpory.findAll();
-        for(Post post : postList)
-            if(post.getTitle().equalsIgnoreCase(postTitle)){
+        for(Post post : postList) if(post.getTitle().equalsIgnoreCase(postTitle)){
                 foundPost = post;
                 break;
             }
