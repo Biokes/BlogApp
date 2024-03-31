@@ -14,4 +14,6 @@ public interface UserServices{
     void deleteAll();
 
     long countViewsOnPostWith(ViewsCountRequest viewCountRequest);
+
+    long countNumberOfComments();
 }

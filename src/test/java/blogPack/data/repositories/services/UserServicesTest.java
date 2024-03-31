@@ -67,7 +67,7 @@ public class UserServicesTest{
         request1.setLastName("LastName");
         request1.setPassword("my password");
         userServices.createUser(request1);
-        assertEquals(0, commentServices.countNumberOfComments());
+        assertEquals(0, userServices.countNumberOfComments());
         userServices.addCommentToPost(commentRequest);
         assertEquals(1, commentServices.countNumberOfComments());
     }
@@ -97,12 +97,12 @@ public class UserServicesTest{
         request.setUserName("new");
         request.setLastName("newLastName");
         request.setPassword("pass101");
-        user = userServices.createUser(request);
+        userServices.createUser(request);
         Post post = new Post();
         PostRequest postRequest = new PostRequest();
         post.setPoster("new");
         postRequest.setTitle("post Title.");
-        post.setTitle(postRequest.getTitle( ));
+        post.setTitle(postRequest.getTitle());
         postRequest.setContent(postRequest.getContent( ));
         postServices.save(post);
         assertEquals(1, postServices.countNumberOfPosts());

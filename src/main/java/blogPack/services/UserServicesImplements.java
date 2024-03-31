@@ -7,6 +7,7 @@ import blogPack.data.repositories.PostRepositpory;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
+import blogPack.dto.ViewsCountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
@@ -25,19 +26,21 @@ public class UserServicesImplements implements UserServices{
         userRepository.save(Mappers.mapRegister(user, registerRequest));
         return user;
     }
-    @Override
     public long countNumberOfUsers(){
         return userRepository.count( );
     }
-
-    @Override
     public void addCommentToPost(CommentRequest commentRequest){
         postServices.addCommentToPost(commentRequest);
-//        commentServices.save(commentRequest);
+    }
+    public void deleteAll(){
+        userRepository.deleteAll();
+    }
+    public long countViewsOnPostWith(ViewsCountRequest viewCountRequest){
+        return 0;
     }
 
     @Override
-    public void deleteAll(){
-        userRepository.deleteAll();
+    public long countNumberOfComments(){
+        return commentServices.countNumberOfComments();
     }
 }
