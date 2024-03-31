@@ -14,6 +14,6 @@ public interface PostServices{
     void deleteAll();
     void deletePost(DeletePostRequest deletePostRequest);
     void addCommentToPost(CommentRequest commentRequest);
-    void viewPostWith(ViewRequest viewRequest);
-    long countViews(ViewsCountRequest viewCountRequest);
+//    void viewPostWith(ViewRequest viewRequest);
+//    long countViews(ViewsCountRequest viewCountRequest);
 }

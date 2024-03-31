@@ -19,8 +19,8 @@ public class BlogPostService implements PostServices{
     private PostRepositpory postRepositpory;
     @Autowired
     private CommentServices commentServices;
-    @Autowired
-    private ViewService viewService;
+//    @Autowired
+//    private ViewService viewService;
     public long countNumberOfPosts(){
         return postRepositpory.count( );
     }
@@ -51,13 +51,13 @@ public class BlogPostService implements PostServices{
         throw new InvalidPostException();
 
     }
-    @Override
-    public void viewPostWith(ViewRequest viewRequest){
-        viewService.viewWith(viewRequest);
-    }
-
-    @Override
-    public long countViews(ViewsCountRequest viewCountRequest){
-        return viewService.countViewsWith(viewCountRequest);
-    }
+//    @Override
+//    public void viewPostWith(ViewRequest viewRequest){
+//        viewService.viewWith(viewRequest);
+//    }
+//
+//    @Override
+//    public long countViews(ViewsCountRequest viewCountRequest){
+//        return viewService.countViewsWith(viewCountRequest);
+//    }
 }

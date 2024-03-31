@@ -116,9 +116,23 @@ public class UserServicesTest{
         assertEquals(1, userServices.countViewsOnPostWith(viewCountRequest));
     }
     @Test
-
     void viewPostThatDoesNotExist_testExceptionISThrown(){
-
+        RegisterRequest request= new RegisterRequest();
+        request.setFirstName("newUser");
+        request.setUserName("new");
+        request.setLastName("newLastName");
+        request.setPassword("pass101");
+        userServices.createUser(request);
+        assertEquals(1, postServices.countNumberOfPosts());
+        ViewRequest viewRequest = new ViewRequest();
+        viewRequest.setPosterUsername("userName");
+        viewRequest.setPostTitle("post title");
+        viewRequest.setViewerUsername("new");
+        assertThrows(InvalidPostException.class,()->postServices.viewPostWith(viewRequest));
+        ViewsCountRequest viewCountRequest = new ViewsCountRequest();
+        viewCountRequest.setPostTitle("post title");
+        viewCountRequest.setPosterUsername("userName");
+        assertThrows(InvalidPostException.class,()-> userServices.countViewsOnPostWith(viewCountRequest));
     }
     //view post that is not created yet to throw exception
     // create a post with userName that does not exist
