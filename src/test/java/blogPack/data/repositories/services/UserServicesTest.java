@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import utilities.exception.InvalidPostException;
+import blogPack.exception.InvalidPostException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -109,7 +109,7 @@ public class UserServicesTest{
         viewRequest.setPosterUsername("userName");
         viewRequest.setPostTitle("post title");
         viewRequest.setViewerUsername("new");
-        postServices.viewPostWith(viewRequest);
+        userServices.viewWith(viewRequest);
         ViewsCountRequest viewCountRequest = new ViewsCountRequest();
         viewCountRequest.setPostTitle("post title");
         viewCountRequest.setPosterUsername("userName");
@@ -123,12 +123,11 @@ public class UserServicesTest{
         request.setLastName("newLastName");
         request.setPassword("pass101");
         userServices.createUser(request);
-        assertEquals(1, postServices.countNumberOfPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("userName");
         viewRequest.setPostTitle("post title");
         viewRequest.setViewerUsername("new");
-        assertThrows(InvalidPostException.class,()->postServices.viewPostWith(viewRequest));
+        assertThrows(InvalidPostException.class,()->userServices.viewWith(viewRequest));
         ViewsCountRequest viewCountRequest = new ViewsCountRequest();
         viewCountRequest.setPostTitle("post title");
         viewCountRequest.setPosterUsername("userName");

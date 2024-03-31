@@ -1,4 +1,4 @@
-package utilities.exception;
+package blogPack.exception;
 
 public class InvalidPostException extends BlogExceptions{
     public InvalidPostException(){

@@ -4,7 +4,9 @@ import blogPack.data.model.User;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
+import blogPack.dto.ViewRequest;
 import blogPack.dto.ViewsCountRequest;
+import blogPack.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
@@ -17,6 +19,8 @@ public class UserServicesImplements implements UserServices{
     private PostServices postServices;
     @Autowired
     private CommentServices commentServices;
+    @Autowired
+    private ViewService viewService;
     @Override
     public User createUser(RegisterRequest registerRequest){
         User user = new User();
@@ -44,5 +48,14 @@ public class UserServicesImplements implements UserServices{
     @Override
     public User findUserBy(String posterUsername){
         return userRepository.findUserByUserName(posterUsername);
+    }
+
+    @Override
+    public void viewWith(ViewRequest viewRequest){
+        User userGotten = findUserBy(viewRequest.getPosterUsername());
+        if(userGotten == null){
+            throw new UserNotFoundException();
+        }
+        viewService.viewWith(viewRequest, userGotten);
     }
 }

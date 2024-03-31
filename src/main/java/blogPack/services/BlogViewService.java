@@ -1,5 +1,6 @@
 package blogPack.services;
 
+import blogPack.data.model.User;
 import blogPack.data.model.Views;
 import blogPack.data.repositories.UserRepository;
 import blogPack.data.repositories.ViewRepository;
@@ -14,8 +15,6 @@ import utilities.Mappers;
 public class BlogViewService implements ViewService{
     @Autowired
     private ViewRepository viewRepository;
-    @Autowired
-    private UserServices userServices;
 
     @Override
     public long countViewsWith(ViewsCountRequest viewCountRequest){
@@ -29,10 +28,11 @@ public class BlogViewService implements ViewService{
     }
 
     @Override
-    public void viewWith(ViewRequest viewRequest){
+    public void viewWith(ViewRequest viewRequest, User userGiven){
         Views views = new Views();
-        views.setViewer(userServices.findUserBy(viewRequest.getViewerUsername()));
+        views.setViewer(userGiven);
         Mappers.mapView(views, viewRequest);
         viewRepository.save(views);
     }
+
 }

@@ -1,4 +1,4 @@
-package utilities.exception;
+package blogPack.exception;
 
 public class BlogExceptions extends RuntimeException{
     public BlogExceptions(String message){
