@@ -72,14 +72,13 @@ public class UserServicesTest{
         assertEquals(1, commentServices.countNumberOfComments());
     }
     @Test
-    void commentPostThatIsNotCreated_testExceptionIsThrown(){
-        User user;
+    void commentOnPostThatIsNotCreated_testExceptionIsThrown(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
         request.setLastName("newLastName");
         request.setPassword("pass101");
-        user = userServices.createUser(request);
+        userServices.createUser(request);
         assertEquals(1, userServices.countNumberOfUsers());
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice");

@@ -7,7 +7,7 @@ import blogPack.dto.ViewsCountRequest;
 import org.springframework.stereotype.Service;
 @Service
 public interface UserServices{
-    User createUser(RegisterRequest registerRequest);
+    void createUser(RegisterRequest registerRequest);
     long countNumberOfUsers();
     void addCommentToPost(CommentRequest commentRequest);
     void deleteAll();

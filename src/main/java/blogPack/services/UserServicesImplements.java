@@ -9,6 +9,7 @@ import blogPack.dto.ViewRequest;
 import blogPack.dto.ViewsCountRequest;
 import blogPack.exception.InvalidUsernameException;
 import blogPack.exception.NoPostMatchException;
+import blogPack.exception.PostDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
@@ -24,21 +25,17 @@ public class UserServicesImplements implements UserServices{
     @Autowired
     private ViewService viewService;
     @Override
-    public User createUser(RegisterRequest registerRequest){
+    public void createUser(RegisterRequest registerRequest){
         User user = new User();
         userRepository.save(Mappers.mapRegister(user, registerRequest));
-        return user;
-    }
+   }
     public long countNumberOfUsers(){
         return userRepository.count( );
     }
     public void addCommentToPost(CommentRequest commentRequest){
         Post post = postServices.findPostBy(commentRequest.getPostTitle());
-        User commenter = findUserBy(commentRequest.getCommenterUsername( ));
-        if(commenter == null)
-            throw new InvalidUsernameException();
-        commentRequest.setCommenter(commenter);
-        commentServices.save(commentRequest);
+        validatePost(post);
+        saveComment(commentRequest);
     }
     public void deleteAll(){
         userRepository.deleteAll();
@@ -47,23 +44,31 @@ public class UserServicesImplements implements UserServices{
         postServices.findPostBy(viewCountRequest.getPostTitle( ));
         return viewService.countViewsWith(viewCountRequest);
     }
-
-    @Override
     public long countNumberOfComments(){
         return commentServices.countNumberOfComments();
     }
-
-    @Override
     public User findUserBy(String posterUsername){
         return userRepository.findUserByUserName(posterUsername);
     }
-
-    @Override
     public void viewWith(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
         if(userGotten == null){
             throw new NoPostMatchException();
         }
         viewService.viewWith(viewRequest, userGotten);
+    }
+    private void validatePost(Post post){
+        if(post == null )
+            throw new PostDoesNotExistException();
+    }
+    private void validateComment(CommentRequest commentRequest){
+        User commenter = findUserBy(commentRequest.getCommenterUsername( ));
+        if(commenter == null) throw new InvalidUsernameException();
+    }
+    private void saveComment(CommentRequest commentRequest){
+        validateComment(commentRequest);
+        User commenter = findUserBy(commentRequest.getCommenterUsername( ));
+        commentRequest.setCommenter(commenter);
+        commentServices.save(commentRequest);
     }
 }
