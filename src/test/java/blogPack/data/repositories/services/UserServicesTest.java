@@ -113,7 +113,6 @@ public class UserServicesTest{
         commentRequest.setCommenter(user);
         commentRequest.setPostTitle("post Title.");
         commentRequest.setPosterName("userName");
-        ViewRequest
     }
     //view post thtat is not created yet to throw exception
     // create a post with userName that does not exist
