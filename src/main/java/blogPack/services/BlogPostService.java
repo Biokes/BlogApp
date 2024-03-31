@@ -17,19 +17,15 @@ public class BlogPostService implements PostServices{
     private PostRepositpory postRepositpory;
     @Autowired
     private CommentServices commentServices;
-    @Override
     public long countNumberOfPosts(){
         return postRepositpory.count( );
     }
-    @Override
     public void save(Post post){
         postRepositpory.save(post);
     }
-    @Override
     public void deleteAll(){
         postRepositpory.deleteAll();
     }
-    @Override
     public void deletePost(DeletePostRequest deletePostRequest){
         for(Post post : postRepositpory.findAll()){
             if( post.getTitle().equalsIgnoreCase(deletePostRequest.getPostTitle( )) )
@@ -40,9 +36,8 @@ public class BlogPostService implements PostServices{
             }
 
         }
-    @Override
     public void addCommentToPost(CommentRequest commentRequest){
-        List<Post> posterList = postRepositpory.findAllPostByUserName(commentRequest.getPosterName());
+        List<Post> posterList = postRepositpory.findPostsByPoster(commentRequest.getPosterName());
         for(Post post : posterList){
             if (post.getTitle().equalsIgnoreCase(commentRequest.getPostTitle( ))){
                 commentServices.save(commentRequest);

@@ -42,12 +42,12 @@ public class UserServicesTest{
         assertEquals(1,userServices.countNumberOfUsers());
     }
     @Test
-    void commentOnPost_testPostIsCommenetedOn(){
+    void commentOnPost_testPostIsCommentedOn(){
         User user;
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
-        request.setLastName("newlastName");
+        request.setLastName("newLastName");
         request.setPassword("pass101");
         user = userServices.createUser(request);
         Post post = new Post();
@@ -74,14 +74,15 @@ public class UserServicesTest{
         assertEquals(1, commentServices.countNumberOfComments());
     }
     @Test
-    void comentPostThats_notCreatedThroewsException(){
+    void commentPostThatIsNotCreated_testExceptionIsThrown(){
         User user;
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
-        request.setLastName("newlastName");
+        request.setLastName("newLastName");
         request.setPassword("pass101");
         user = userServices.createUser(request);
+        assertEquals(1, userServices.countNumberOfUsers());
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice");
         commentRequest.setCommenter(user);
@@ -90,4 +91,35 @@ public class UserServicesTest{
         assertEquals(0, commentServices.countNumberOfComments());
         assertThrows(InvalidPostException.class, ()->userServices.addCommentToPost(commentRequest));
     }
+    @Test
+    void viewPost_testPostIsViewed(){
+        User user;
+        RegisterRequest request= new RegisterRequest();
+        request.setFirstName("newUser");
+        request.setUserName("new");
+        request.setLastName("newLastName");
+        request.setPassword("pass101");
+        user = userServices.createUser(request);
+        Post post = new Post();
+        PostRequest postRequest = new PostRequest();
+        post.setPoster("userName");
+        postRequest.setTitle("post Title.");
+        post.setTitle(postRequest.getTitle( ));
+        postRequest.setContent(postRequest.getContent( ));
+        postServices.save(post);
+        assertEquals(1, postServices.countNumberOfPosts());
+        CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice");
+        commentRequest.setCommenter(user);
+        commentRequest.setPostTitle("post Title.");
+        commentRequest.setPosterName("userName");
+        ViewRequest
+    }
+    //view post thtat is not created yet to throw exception
+    // create a post with userName that does not exist
+    //update post
+    //delete post
+    //update post that does not exist
+    //find user that does not exist
+    //delete all user post with incorrect password
 }
