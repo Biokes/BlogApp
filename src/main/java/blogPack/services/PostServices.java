@@ -13,9 +13,10 @@ public interface PostServices{
     void save(Post post);
     void deleteAll();
     void deletePost(DeletePostRequest deletePostRequest);
-    void addCommentToPost(CommentRequest commentRequest);
 
     long countViews(ViewsCountRequest viewCountRequest);
+
+    Post findPostBy(String postTitle);
 //    void viewPostWith(ViewRequest viewRequest);
 //    long countViews(ViewsCountRequest viewCountRequest);
 }

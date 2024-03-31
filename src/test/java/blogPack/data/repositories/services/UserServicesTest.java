@@ -3,6 +3,7 @@ package blogPack.data.repositories.services;
 import blogPack.data.model.Post;
 import blogPack.data.model.User;
 import blogPack.dto.*;
+import blogPack.exception.NoPostMatchException;
 import blogPack.services.CommentServices;
 import blogPack.services.PostServices;
 import blogPack.services.UserServices;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import blogPack.exception.InvalidPostException;
+import blogPack.exception.PostDoesNotExistException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -87,7 +88,7 @@ public class UserServicesTest{
         commentRequest.setPostTitle("post Title.");
         commentRequest.setPosterName("userName");
         assertEquals(0, commentServices.countNumberOfComments());
-        assertThrows(InvalidPostException.class, ()->userServices.addCommentToPost(commentRequest));
+        assertThrows(PostDoesNotExistException.class, ()->userServices.addCommentToPost(commentRequest));
     }
     @Test
     void viewPost_testPostIsViewed(){
@@ -116,7 +117,7 @@ public class UserServicesTest{
         assertEquals(1, userServices.countViewsOnPostWith(viewCountRequest));
     }
     @Test
-    void viewPostThatDoesNotExist_testExceptionISThrown(){
+    void viewPostWithWrongUsername_testExceptionISThrown(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -127,11 +128,11 @@ public class UserServicesTest{
         viewRequest.setPosterUsername("userName");
         viewRequest.setPostTitle("post title");
         viewRequest.setViewerUsername("new");
-        assertThrows(InvalidPostException.class,()->userServices.viewWith(viewRequest));
+        assertThrows(NoPostMatchException.class,()->userServices.viewWith(viewRequest));
         ViewsCountRequest viewCountRequest = new ViewsCountRequest();
         viewCountRequest.setPostTitle("post title");
         viewCountRequest.setPosterUsername("userName");
-        assertThrows(InvalidPostException.class,()-> userServices.countViewsOnPostWith(viewCountRequest));
+        assertThrows(PostDoesNotExistException.class,()-> userServices.countViewsOnPostWith(viewCountRequest));
     }
     //view post that is not created yet to throw exception
     // create a post with userName that does not exist

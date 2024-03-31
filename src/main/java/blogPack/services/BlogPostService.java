@@ -7,7 +7,7 @@ import blogPack.dto.DeletePostRequest;
 import blogPack.dto.ViewsCountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import blogPack.exception.InvalidPostException;
+import blogPack.exception.PostDoesNotExistException;
 
 import java.util.List;
 
@@ -16,8 +16,6 @@ import java.util.List;
 public class BlogPostService implements PostServices{
     @Autowired
     private PostRepositpory postRepositpory;
-    @Autowired
-    private CommentServices commentServices;
     @Autowired
     private ViewService viewService;
     public long countNumberOfPosts(){
@@ -39,24 +37,30 @@ public class BlogPostService implements PostServices{
             }
 
         }
-    public void addCommentToPost(CommentRequest commentRequest){
-        List<Post> posterList = postRepositpory.findPostsByPoster(commentRequest.getPosterName());
-        for(Post post : posterList){
-            if (post.getTitle().equalsIgnoreCase(commentRequest.getPostTitle( ))){
-                commentServices.save(commentRequest);
-                return;
-            }
-        }
-        throw new InvalidPostException();
-
-    }
-//    @Override
+//    public void addCommentToPost(CommentRequest commentRequest){
+//        List<Post> posterList = postRepositpory.findPostsByPoster(commentRequest.getPosterName());
+//        for(Post post : posterList){
+//            if (post.getTitle().equalsIgnoreCase(commentRequest.getPostTitle( ))){
+//                commentServices.save(commentRequest);
+//                return;
+//            }
+//        }
+//        throw new PostDoesNotExistException();
+//
+//    }
 //    public void viewPostWith(ViewRequest viewRequest){
 //        viewService.viewWith(viewRequest);
 //    }
-//
     @Override
     public long countViews(ViewsCountRequest viewCountRequest){
         return viewService.countViewsWith(viewCountRequest);
+    }
+
+    @Override
+    public Post findPostBy(String postTitle){
+        Post post = postRepositpory.findPostByTitle(postTitle);
+        if(post == null)
+            throw new PostDoesNotExistException();
+        return post;
     }
 }

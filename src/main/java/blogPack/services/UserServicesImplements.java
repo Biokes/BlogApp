@@ -1,12 +1,14 @@
 package blogPack.services;
 
+import blogPack.data.model.Post;
 import blogPack.data.model.User;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
 import blogPack.dto.ViewRequest;
 import blogPack.dto.ViewsCountRequest;
-import blogPack.exception.UserNotFoundException;
+import blogPack.exception.InvalidUsernameException;
+import blogPack.exception.NoPostMatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
@@ -31,7 +33,12 @@ public class UserServicesImplements implements UserServices{
         return userRepository.count( );
     }
     public void addCommentToPost(CommentRequest commentRequest){
-        postServices.addCommentToPost(commentRequest);
+        Post post = postServices.findPostBy(commentRequest.getPostTitle());
+        User commenter = findUserBy(commentRequest.getCommenterUsername( ));
+        if(commenter == null)
+            throw new InvalidUsernameException();
+        commentRequest.setCommenter(commenter);
+        commentServices.save(commentRequest);
     }
     public void deleteAll(){
         userRepository.deleteAll();
@@ -54,7 +61,7 @@ public class UserServicesImplements implements UserServices{
     public void viewWith(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
         if(userGotten == null){
-            throw new UserNotFoundException();
+            throw new NoPostMatchException();
         }
         viewService.viewWith(viewRequest, userGotten);
     }

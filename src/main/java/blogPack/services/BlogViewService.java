@@ -10,23 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
+import java.util.List;
+
 
 @Service
 public class BlogViewService implements ViewService{
     @Autowired
     private ViewRepository viewRepository;
-
     @Override
     public long countViewsWith(ViewsCountRequest viewCountRequest){
         long count = 0;
-        for( Views view : viewRepository.findViewsBy(viewCountRequest.getPostTitle())){
+        List<Views> viewsList = viewRepository.findViewsBy(viewCountRequest.getPostTitle());
+        for( Views view : viewsList){
             if(view.getPosterUsername().equalsIgnoreCase(viewCountRequest.getPosterUsername())){
                 count++;
             }
         }
         return count;
     }
-
     @Override
     public void viewWith(ViewRequest viewRequest, User userGiven){
         Views views = new Views();
