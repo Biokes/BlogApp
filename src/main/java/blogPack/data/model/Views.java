@@ -14,4 +14,6 @@ public class Views{
     private LocalDateTime timeViewed;
     @DBRef
     private User viewer;
+    private String postTitle;
+    private String posterUsername;
 }

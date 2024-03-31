@@ -36,7 +36,7 @@ public class UserServicesImplements implements UserServices{
         userRepository.deleteAll();
     }
     public long countViewsOnPostWith(ViewsCountRequest viewCountRequest){
-        return 0;
+        return postServices.countViews(viewCountRequest);
     }
 
     @Override

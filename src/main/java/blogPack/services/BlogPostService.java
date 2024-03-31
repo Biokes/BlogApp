@@ -5,6 +5,7 @@ import blogPack.data.repositories.PostRepositpory;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.DeletePostRequest;
 import blogPack.dto.ViewRequest;
+import blogPack.dto.ViewsCountRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.exception.InvalidPostException;
@@ -18,6 +19,8 @@ public class BlogPostService implements PostServices{
     private PostRepositpory postRepositpory;
     @Autowired
     private CommentServices commentServices;
+    @Autowired
+    private ViewService viewService;
     public long countNumberOfPosts(){
         return postRepositpory.count( );
     }
@@ -51,5 +54,10 @@ public class BlogPostService implements PostServices{
     @Override
     public void viewPostWith(ViewRequest viewRequest){
 
+    }
+
+    @Override
+    public long countViews(ViewsCountRequest viewCountRequest){
+        return viewService.countViewsWith(viewCountRequest);
     }
 }

@@ -91,7 +91,7 @@ public class UserServicesTest{
     }
     @Test
     void viewPost_testPostIsViewed(){
-        User user;
+//        User user;
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -120,7 +120,7 @@ public class UserServicesTest{
     // create a post with userName that does not exist
     //update post
     //delete post
-    //view post that does not exixt
+    //view post that does not exist
     //update post that does not exist
     //find user that does not exist
     //delete all user post with incorrect password
