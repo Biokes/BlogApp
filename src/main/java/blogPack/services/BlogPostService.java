@@ -16,8 +16,8 @@ import java.util.List;
 public class BlogPostService implements PostServices{
     @Autowired
     private PostRepositpory postRepositpory;
-    @Autowired
-    private ViewService viewService;
+//    @Autowired
+//    private ViewService viewService;
     public long countNumberOfPosts(){
         return postRepositpory.count( );
     }
@@ -51,10 +51,10 @@ public class BlogPostService implements PostServices{
 //    public void viewPostWith(ViewRequest viewRequest){
 //        viewService.viewWith(viewRequest);
 //    }
-    @Override
-    public long countViews(ViewsCountRequest viewCountRequest){
-        return viewService.countViewsWith(viewCountRequest);
-    }
+//    @Override
+//    public long countViews(ViewsCountRequest viewCountRequest){
+//        return viewService.countViewsWith(viewCountRequest);
+//    }
 
     @Override
     public Post findPostBy(String postTitle){

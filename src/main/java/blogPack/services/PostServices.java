@@ -14,7 +14,7 @@ public interface PostServices{
     void deleteAll();
     void deletePost(DeletePostRequest deletePostRequest);
 
-    long countViews(ViewsCountRequest viewCountRequest);
+//    long countViews(ViewsCountRequest viewCountRequest);
 
     Post findPostBy(String postTitle);
 //    void viewPostWith(ViewRequest viewRequest);

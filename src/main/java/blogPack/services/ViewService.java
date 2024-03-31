@@ -12,4 +12,6 @@ public interface ViewService{
 
     void viewWith(ViewRequest viewRequest, User userGiven);
 
+//    long countViews(ViewsCountRequest viewCountRequest);
+
 }

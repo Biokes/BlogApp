@@ -107,7 +107,7 @@ public class UserServicesTest{
         postServices.save(post);
         assertEquals(1, postServices.countNumberOfPosts());
         ViewRequest viewRequest = new ViewRequest();
-        viewRequest.setPosterUsername("userName");
+        viewRequest.setPosterUsername("new");
         viewRequest.setPostTitle("post title");
         viewRequest.setViewerUsername("new");
         userServices.viewWith(viewRequest);
@@ -117,7 +117,7 @@ public class UserServicesTest{
         assertEquals(1, userServices.countViewsOnPostWith(viewCountRequest));
     }
     @Test
-    void viewPostWithWrongUsername_testExceptionISThrown(){
+    void viewPostWithWrongUsername_testExceptionIsThrown(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
