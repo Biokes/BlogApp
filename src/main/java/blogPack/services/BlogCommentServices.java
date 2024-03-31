@@ -3,14 +3,13 @@ package blogPack.services;
 import blogPack.data.model.Comment;
 import blogPack.data.repositories.CommentRepository;
 import blogPack.dto.CommentRequest;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
 @Service
-@AllArgsConstructor
 public class BlogCommentServices implements CommentServices{
-
+    @Autowired
     private CommentRepository commentRepository;
     @Override
     public long countNumberOfComments(){

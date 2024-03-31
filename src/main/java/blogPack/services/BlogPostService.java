@@ -53,7 +53,7 @@ public class BlogPostService implements PostServices{
     }
     @Override
     public void viewPostWith(ViewRequest viewRequest){
-
+        viewService.viewWith(viewRequest);
     }
 
     @Override

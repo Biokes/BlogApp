@@ -16,4 +16,6 @@ public interface UserServices{
     long countViewsOnPostWith(ViewsCountRequest viewCountRequest);
 
     long countNumberOfComments();
+
+    User findUserBy(String posterUsername);
 }

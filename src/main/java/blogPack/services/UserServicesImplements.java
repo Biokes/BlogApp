@@ -1,9 +1,6 @@
 package blogPack.services;
 
-import blogPack.data.model.Comment;
 import blogPack.data.model.User;
-import blogPack.data.repositories.CommentRepository;
-import blogPack.data.repositories.PostRepositpory;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
@@ -42,5 +39,10 @@ public class UserServicesImplements implements UserServices{
     @Override
     public long countNumberOfComments(){
         return commentServices.countNumberOfComments();
+    }
+
+    @Override
+    public User findUserBy(String posterUsername){
+        return userRepository.findUserByUserName(posterUsername);
     }
 }

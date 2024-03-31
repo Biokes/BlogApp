@@ -91,7 +91,6 @@ public class UserServicesTest{
     }
     @Test
     void viewPost_testPostIsViewed(){
-//        User user;
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -115,6 +114,11 @@ public class UserServicesTest{
         viewCountRequest.setPostTitle("post title");
         viewCountRequest.setPosterUsername("userName");
         assertEquals(1, userServices.countViewsOnPostWith(viewCountRequest));
+    }
+    @Test
+
+    void viewPostThatDoesNotExist_testExceptionISThrown(){
+
     }
     //view post that is not created yet to throw exception
     // create a post with userName that does not exist

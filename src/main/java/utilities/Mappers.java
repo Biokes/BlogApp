@@ -2,8 +2,10 @@ package utilities;
 
 import blogPack.data.model.Comment;
 import blogPack.data.model.User;
+import blogPack.data.model.Views;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
+import blogPack.dto.ViewRequest;
 
 import java.time.LocalDateTime;
 
@@ -20,5 +22,11 @@ public class Mappers{
         comment.setCommentBody(commentRequest.getCommentBody( ));
         comment.setTimeOfComment(LocalDateTime.now( ));
         comment.setPostTitle(commentRequest.getPostTitle( ));
+    }
+
+    public static void mapView(Views views, ViewRequest viewRequest){
+        views.setTimeViewed(LocalDateTime.now());
+        views.setPosterUsername(viewRequest.getPosterUsername());
+        views.setPostTitle(viewRequest.getPostTitle());
     }
 }
