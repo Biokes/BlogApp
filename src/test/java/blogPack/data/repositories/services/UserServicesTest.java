@@ -2,9 +2,7 @@ package blogPack.data.repositories.services;
 
 import blogPack.data.model.Post;
 import blogPack.data.model.User;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.PostRequest;
-import blogPack.dto.RegisterRequest;
+import blogPack.dto.*;
 import blogPack.services.CommentServices;
 import blogPack.services.PostServices;
 import blogPack.services.UserServices;
@@ -102,18 +100,27 @@ public class UserServicesTest{
         user = userServices.createUser(request);
         Post post = new Post();
         PostRequest postRequest = new PostRequest();
-        post.setPoster("userName");
+        post.setPoster("new");
         postRequest.setTitle("post Title.");
         post.setTitle(postRequest.getTitle( ));
         postRequest.setContent(postRequest.getContent( ));
         postServices.save(post);
         assertEquals(1, postServices.countNumberOfPosts());
-        postServices.viewPostWith(post);
+        ViewRequest viewRequest = new ViewRequest();
+        viewRequest.setPosterUsername("userName");
+        viewRequest.setPostTitle("post title");
+        viewRequest.setViewerUsername("new");
+        postServices.viewPostWith(viewRequest);
+        ViewsCountRequest viewCountRequest = new ViewsCountRequest();
+        viewCountRequest.setPostTitle("post title");
+        viewCountRequest.setPosterUsername("userName");
+        assertEquals(1, userServices.countViewsOnPostWith(viewCountRequest));
     }
     //view post that is not created yet to throw exception
     // create a post with userName that does not exist
     //update post
     //delete post
+    //view post that does not exixt
     //update post that does not exist
     //find user that does not exist
     //delete all user post with incorrect password

@@ -3,6 +3,7 @@ package blogPack.services;
 import blogPack.data.model.User;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.RegisterRequest;
+import blogPack.dto.ViewsCountRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,4 +12,6 @@ public interface UserServices{
     long countNumberOfUsers();
     void addCommentToPost(CommentRequest commentRequest);
     void deleteAll();
+
+    long countViewsOnPostWith(ViewsCountRequest viewCountRequest);
 }
