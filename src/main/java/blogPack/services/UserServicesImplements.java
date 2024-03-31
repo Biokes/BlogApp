@@ -33,7 +33,7 @@ public class UserServicesImplements implements UserServices{
         return userRepository.count( );
     }
     public void addCommentToPost(CommentRequest commentRequest){
-        postServices.findPostBy(commentRequest.getPostTitle());
+        Post post = postServices.findPostBy(commentRequest.getPostTitle());
         saveComment(commentRequest);
     }
     public void deleteAll(){

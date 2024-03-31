@@ -43,7 +43,7 @@ public class BlogPostService implements PostServices{
                 foundPost = post;
                 break;
             }
-        if(foundPost == null) throw new PostDoesNotExistException();
+        if(foundPost.getId() == null) throw new PostDoesNotExistException();
         return foundPost;
     }
 }
