@@ -7,11 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ViewService{
-
     long countViewsWith(ViewsCountRequest viewCountRequest);
-
     void viewWith(ViewRequest viewRequest, User userGiven);
-
-//    long countViews(ViewsCountRequest viewCountRequest);
-
 }

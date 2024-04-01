@@ -3,10 +3,7 @@ package blogPack.services;
 import blogPack.data.model.Post;
 import blogPack.data.model.User;
 import blogPack.data.repositories.UserRepository;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.RegisterRequest;
-import blogPack.dto.ViewRequest;
-import blogPack.dto.ViewsCountRequest;
+import blogPack.dto.*;
 import blogPack.exception.InvalidUsernameException;
 import blogPack.exception.NoPostMatchException;
 import blogPack.exception.PostDoesNotExistException;
@@ -49,12 +46,25 @@ public class UserServicesImplements implements UserServices{
     public User findUserBy(String posterUsername){
         return userRepository.findUserByUserName(posterUsername);
     }
-    public void viewWith(ViewRequest viewRequest){
+    public ViewPostResponse viewPost(ViewRequest viewRequest){
+        User userGotten = findUserBy(viewRequest.getPosterUsername());
+        validatePoster(viewRequest);
+        viewService.viewWith(viewRequest, userGotten);
+        Post post = postServices.findPostBy(viewRequest.getPostTitle());
+        ViewPostResponse viewPostResponse = Mappers.mapPostResponse(post);
+        return viewPostResponse;
+    }
+    @Override
+    public void savePost(PostRequest postRequest){
+        Post post = new Post();
+        Mappers.mapPost(postRequest,post);
+        postServices.save(post);
+    }
+    private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
         if(userGotten == null){
             throw new NoPostMatchException();
         }
-        viewService.viewWith(viewRequest, userGotten);
     }
     private void validateComment(CommentRequest commentRequest){
         User commenter = findUserBy(commentRequest.getCommenterUsername( ));

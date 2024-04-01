@@ -1,12 +1,12 @@
 package utilities;
 
 import blogPack.data.model.Comment;
+import blogPack.data.model.Post;
 import blogPack.data.model.User;
 import blogPack.data.model.Views;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.RegisterRequest;
-import blogPack.dto.ViewRequest;
+import blogPack.dto.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Mappers{
@@ -28,5 +28,20 @@ public class Mappers{
         views.setTimeViewed(LocalDateTime.now());
         views.setPosterUsername(viewRequest.getPosterUsername());
         views.setPostTitle(viewRequest.getPostTitle());
+    }
+
+    public static void mapPost(PostRequest postRequest, Post post){
+        post.setTitle(postRequest.getTitle());
+        post.setDateCreated(LocalDate.now());
+        post.setPoster(postRequest.getPosterUserName( ));
+        post.setContent(postRequest.getContent( ));
+    }
+
+    public static ViewPostResponse mapPostResponse(Post foundPost){
+        ViewPostResponse response = new ViewPostResponse();
+        response.setPostbody(foundPost.getContent( ));
+        response.setPostTitle(foundPost.getTitle());
+        response.setDateCreated(foundPost.getDateCreated());
+        return response;
     }
 }

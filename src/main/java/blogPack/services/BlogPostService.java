@@ -2,12 +2,11 @@ package blogPack.services;
 
 import blogPack.data.model.Post;
 import blogPack.data.repositories.PostRepositpory;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.DeletePostRequest;
-import blogPack.dto.ViewsCountRequest;
+import blogPack.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import blogPack.exception.PostDoesNotExistException;
+import utilities.Mappers;
 
 import java.util.List;
 
@@ -43,7 +42,13 @@ public class BlogPostService implements PostServices{
                 foundPost = post;
                 break;
             }
-        if(foundPost.getId() == null) throw new PostDoesNotExistException();
-        return foundPost;
+        if(foundPost.getId() == null && foundPost.getDateCreated()== null) throw new PostDoesNotExistException();
+     return foundPost;
+    }
+
+    @Override
+    public void createPost(PostRequest postRequest){
+        Post post = new Post();
+        Mappers.mapPost(postRequest, post);
     }
 }

@@ -1,7 +1,6 @@
 package blogPack.data.repositories.services;
 
 import blogPack.data.model.Post;
-import blogPack.data.model.User;
 import blogPack.dto.*;
 import blogPack.exception.NoPostMatchException;
 import blogPack.services.CommentServices;
@@ -52,6 +51,7 @@ public class UserServicesTest{
         PostRequest postRequest = new PostRequest();
         post.setPoster("userName");
         postRequest.setTitle("post Title.");
+        postRequest.setPosterUserName("new");
         post.setTitle(postRequest.getTitle( ));
         postRequest.setContent(postRequest.getContent( ));
         postServices.save(post);
@@ -98,17 +98,18 @@ public class UserServicesTest{
         userServices.createUser(request);
         Post post = new Post();
         PostRequest postRequest = new PostRequest();
-        post.setPoster("new");
+        postRequest.setPosterUserName("new");
         postRequest.setTitle("post Title.");
+        postRequest.setContent("new  post to test the code");
         post.setTitle(postRequest.getTitle());
         postRequest.setContent(postRequest.getContent( ));
-        postServices.save(post);
+        userServices.savePost(postRequest);
         assertEquals(1, postServices.countNumberOfPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
         viewRequest.setPostTitle("post title");
         viewRequest.setViewerUsername("new");
-        userServices.viewWith(viewRequest);
+        userServices.viewPost(viewRequest);
         ViewsCountRequest viewCountRequest = new ViewsCountRequest();
         viewCountRequest.setPostTitle("post title");
         viewCountRequest.setPosterUsername("userName");
@@ -126,7 +127,7 @@ public class UserServicesTest{
         viewRequest.setPosterUsername("userName");
         viewRequest.setPostTitle("post title");
         viewRequest.setViewerUsername("new");
-        assertThrows(NoPostMatchException.class,()->userServices.viewWith(viewRequest));
+        assertThrows(NoPostMatchException.class,()->userServices.viewPost(viewRequest));
         ViewsCountRequest viewCountRequest = new ViewsCountRequest();
         viewCountRequest.setPostTitle("post title");
         viewCountRequest.setPosterUsername("userName");

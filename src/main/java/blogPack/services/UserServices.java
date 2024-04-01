@@ -1,9 +1,6 @@
 package blogPack.services;
 import blogPack.data.model.User;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.RegisterRequest;
-import blogPack.dto.ViewRequest;
-import blogPack.dto.ViewsCountRequest;
+import blogPack.dto.*;
 import org.springframework.stereotype.Service;
 @Service
 public interface UserServices{
@@ -15,5 +12,7 @@ public interface UserServices{
     long countNumberOfComments();
     User findUserBy(String posterUsername);
 
-    void viewWith(ViewRequest viewRequest);
+    ViewPostResponse viewPost(ViewRequest viewRequest);
+
+    void savePost(PostRequest postRequest);
 }
