@@ -7,19 +7,17 @@ import blogPack.dto.*;
 import blogPack.exception.IncorrectPasswordException;
 import blogPack.exception.InvalidUsernameException;
 import blogPack.exception.NoPostMatchException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
 @Service
+@AllArgsConstructor
 public class UserServicesImplements implements UserServices{
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private PostServices postServices;
-    @Autowired
     private CommentServices commentServices;
-    @Autowired
     private ViewService viewService;
     @Override
     public void createUser(RegisterRequest registerRequest){
@@ -30,7 +28,7 @@ public class UserServicesImplements implements UserServices{
         return userRepository.count( );
     }
     public void commentOnPostWith(CommentRequest commentRequest){
-        Post post = postServices.findPostBy(commentRequest.getPostTitle());
+        postServices.findPostBy(commentRequest.getPostTitle());
         saveComment(commentRequest);
     }
     public void deleteAll(){
@@ -52,8 +50,7 @@ public class UserServicesImplements implements UserServices{
         viewService.viewWith(viewRequest, userGotten);
         Post post = postServices.findPostBy(viewRequest.getPostTitle());
         System.out.println(post);
-        ViewPostResponse viewPostResponse = Mappers.mapPostResponse(post);
-        return viewPostResponse;
+        return Mappers.mapPostResponse(post);
     }
     @Override
     public void savePost(PostRequest postRequest){
@@ -78,7 +75,6 @@ public class UserServicesImplements implements UserServices{
                 commentDetailsRequest.getPosterUsername()
         );
     }
-
     private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
         if(userGotten == null){

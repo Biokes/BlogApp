@@ -3,13 +3,14 @@ package blogPack.services;
 import blogPack.data.model.Comment;
 import blogPack.data.repositories.CommentRepository;
 import blogPack.dto.CommentRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
 @Service
+@AllArgsConstructor
 public class BlogCommentServices implements CommentServices{
-    @Autowired
     private CommentRepository commentRepository;
     @Override
     public long countNumberOfComments(){
@@ -26,9 +27,10 @@ public class BlogCommentServices implements CommentServices{
     }
 
     public long countCommentsOnPost(String postTitle, String posterUsername){
-        long count = 0l;
+        long count = 0;
         for(Comment comment : commentRepository.findAll()){
-            if(comment.getPosterUsername().equalsIgnoreCase(posterUsername) && comment.getPostTitle().equalsIgnoreCase(postTitle))
+            if(comment.getPosterUsername().equalsIgnoreCase(posterUsername)
+                       && comment.getPostTitle().equalsIgnoreCase(postTitle))
                 count++;
         }
         return count;
