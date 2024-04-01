@@ -70,7 +70,7 @@ public class UserServicesImplements implements UserServices{
         );
     }
     public void deletePostWith(DeletePostRequest deletePostRequest){
-
+        postServices.deletePost(deletePostRequest);
     }
     private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());

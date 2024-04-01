@@ -11,16 +11,10 @@ public interface UserServices{
     long countViewsOnPostWith(ViewsCountRequest viewCountRequest);
     long countNumberOfComments();
     User findUserBy(String posterUsername);
-
     ViewPostResponse viewPost(ViewRequest viewRequest);
-
     void savePost(PostRequest postRequest);
-
     long countPosts();
-
     void updatePost(UpdatePostRequest updatePostRequest);
-
     long countNumberOfCommentsOnPost(CommentDetailsRequest commentDetailsRequest);
-
     void deletePostWith(DeletePostRequest deletePostRequest);
 }

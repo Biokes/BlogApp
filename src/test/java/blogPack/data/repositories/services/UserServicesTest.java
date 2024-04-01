@@ -210,6 +210,7 @@ public class UserServicesTest{
         post.setTitle(postRequest.getTitle());
         postRequest.setContent(postRequest.getContent( ));
         userServices.savePost(postRequest);
+        assertEquals(1, userServices.countPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
         viewRequest.setPostTitle("post title.");
@@ -217,16 +218,16 @@ public class UserServicesTest{
         userServices.viewPost(viewRequest);
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice");
-        commentRequest.setCommenterUsername("biokes");
-        commentRequest.setPostTitle("post101");
-        commentRequest.setPosterName("biokes");
+        commentRequest.setCommenterUsername("new");
+        commentRequest.setPostTitle("post title.");
+        commentRequest.setPosterName("new");
         assertEquals(0,userServices.countNumberOfComments());
         userServices.commentOnPostWith(commentRequest);
-         commentRequest = new CommentRequest();
+        commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice \ni ❤️ dis");
-        commentRequest.setCommenterUsername("biokes");
-        commentRequest.setPostTitle("post101");
-        commentRequest.setPosterName("biokes");
+        commentRequest.setCommenterUsername("new");
+        commentRequest.setPostTitle("post title.");
+        commentRequest.setPosterName("new");
         assertEquals(1,userServices.countNumberOfComments());
         userServices.commentOnPostWith(commentRequest);
         assertEquals(2,userServices.countNumberOfComments());
@@ -235,6 +236,7 @@ public class UserServicesTest{
         deletePostRequest.setPosterUserName("new");
         deletePostRequest.setPassword("pass101");
         userServices.deletePostWith(deletePostRequest);
+        assertEquals(0, userServices.countPosts());
     }
     //update post that does not exist
     //delete post with incorrect password
