@@ -43,7 +43,6 @@ public class UserServicesImplements implements UserServices{
         validatePoster(viewRequest);
         viewService.viewWith(viewRequest, userGotten);
         Post post = postServices.findPostBy(viewRequest.getPostTitle());
-        System.out.println(post);
         return Mappers.mapPostResponse(post);
     }
     public void savePost(PostRequest postRequest){
