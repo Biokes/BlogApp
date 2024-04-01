@@ -68,6 +68,9 @@ public class UserServicesImplements implements UserServices{
         validatePassword(deletePostRequest);
         postServices.deletePost(deletePostRequest);
     }
+    public long countViews(){
+        return viewService.count();
+    }
     private void validatePassword(DeletePostRequest deletePostRequest){
         String userPassword = findUserBy(deletePostRequest.getPosterUserName())
                                       .getPassword();

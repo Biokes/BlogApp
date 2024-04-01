@@ -36,4 +36,9 @@ public class BlogViewService implements ViewService{
         viewRepository.save(views);
     }
 
+    @Override
+    public long count(){
+        return viewRepository.findAll().size();
+    }
+
 }

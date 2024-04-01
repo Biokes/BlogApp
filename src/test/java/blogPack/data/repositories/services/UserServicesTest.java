@@ -278,11 +278,61 @@ public class UserServicesTest{
         DeletePostRequest deletePostRequest = new DeletePostRequest();
         deletePostRequest.setPostTitle("post title.");
         deletePostRequest.setPosterUserName("new");
-        deletePostRequest.setPassword("pass101");
+        deletePostRequest.setPassword("pass101up");
         assertThrows(IncorrectPasswordException.class,()->userServices.deletePostWith(deletePostRequest));
     }
-    //update post that does not exist
-    //delete post with incorrect password
-    //view post with wrong details
-    //delete post, all comments and views on post are all deleted
+    @Test void deletePost_testAllCommentsAndViewsOnPostAreDeleted(){
+        RegisterRequest request= new RegisterRequest();
+        request.setFirstName("newUser");
+        request.setUserName("new");
+        request.setLastName("newLastName");
+        request.setPassword("pass101");
+        userServices.createUser(request);
+        request= new RegisterRequest();
+        request.setFirstName("newUser");
+        request.setUserName("new012");
+        request.setLastName("newLastName");
+        request.setPassword("pass101");
+        userServices.createUser(request);
+        Post post = new Post();
+        PostRequest postRequest = new PostRequest();
+        postRequest.setPosterUserName("new");
+        postRequest.setTitle("post Title.");
+        postRequest.setContent("new  post to test the code");
+        post.setTitle(postRequest.getTitle());
+        postRequest.setContent(postRequest.getContent( ));
+        userServices.savePost(postRequest);
+        assertEquals(1, userServices.countPosts());
+        ViewRequest viewRequest = new ViewRequest();
+        viewRequest.setPosterUsername("new");
+        viewRequest.setPostTitle("post title.");
+        viewRequest.setViewerUsername("new");
+        userServices.viewPost(viewRequest);
+        ViewsCountRequest countRequest = new ViewsCountRequest();
+        countRequest.setPosterUsername("new");
+        countRequest.setPostTitle("post title.");
+        countRequest.setViewerUsername("new012");
+        assertEquals(1,userServices.countViewsOnPostWith(countRequest));
+        userServices.viewPost(viewRequest);
+        CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice");
+        commentRequest.setCommenterUsername("new012");
+        commentRequest.setPostTitle("post title.");
+        commentRequest.setPosterName("new");
+        userServices.commentOnPostWith(commentRequest);
+        DeletePostRequest deletePostRequest = new DeletePostRequest();
+        deletePostRequest.setPostTitle("post title.");
+        deletePostRequest.setPosterUserName("new");
+        deletePostRequest.setPassword("pass101");
+        userServices.deletePostWith(deletePostRequest);
+        assertEquals(0, userServices.countPosts());
+        CommentDetailsRequest detailsRequest = new CommentDetailsRequest();
+        detailsRequest.setPosterUsername("new");
+        detailsRequest.setPostTitle("post title.");
+        assertEquals(0, userServices.countNumberOfCommentsOnPost(detailsRequest));
+        assertEquals(0,userServices.countViews());
+    }
+    //test no every userName is dynamic
+    // test anonymous view
+    //test view post comes with comments and views
 }
