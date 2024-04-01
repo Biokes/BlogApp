@@ -6,4 +6,5 @@ import lombok.Data;
 public class DeletePostRequest{
     private String posterUserName;
     private String postTitle;
+    private String password;
 }

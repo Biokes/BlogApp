@@ -195,10 +195,49 @@ public class UserServicesTest{
         details.setPostTitle("post101");
         assertEquals(1,userServices.countNumberOfCommentsOnPost(details));
     }
-    //delete post
+    @Test void deletePost_testPostIsDeleted(){
+        RegisterRequest request= new RegisterRequest();
+        request.setFirstName("newUser");
+        request.setUserName("new");
+        request.setLastName("newLastName");
+        request.setPassword("pass101");
+        userServices.createUser(request);
+        Post post = new Post();
+        PostRequest postRequest = new PostRequest();
+        postRequest.setPosterUserName("new");
+        postRequest.setTitle("post Title.");
+        postRequest.setContent("new  post to test the code");
+        post.setTitle(postRequest.getTitle());
+        postRequest.setContent(postRequest.getContent( ));
+        userServices.savePost(postRequest);
+        ViewRequest viewRequest = new ViewRequest();
+        viewRequest.setPosterUsername("new");
+        viewRequest.setPostTitle("post title.");
+        viewRequest.setViewerUsername("new");
+        userServices.viewPost(viewRequest);
+        CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice");
+        commentRequest.setCommenterUsername("biokes");
+        commentRequest.setPostTitle("post101");
+        commentRequest.setPosterName("biokes");
+        assertEquals(0,userServices.countNumberOfComments());
+        userServices.commentOnPostWith(commentRequest);
+         commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice \ni ❤️ dis");
+        commentRequest.setCommenterUsername("biokes");
+        commentRequest.setPostTitle("post101");
+        commentRequest.setPosterName("biokes");
+        assertEquals(1,userServices.countNumberOfComments());
+        userServices.commentOnPostWith(commentRequest);
+        assertEquals(2,userServices.countNumberOfComments());
+        DeletePostRequest deletePostRequest = new DeletePostRequest();
+        deletePostRequest.setPostTitle("post101");
+        deletePostRequest.setPosterUserName("new");
+        deletePostRequest.setPassword("pass101");
+
+    }
     //update post that does not exist
     //delete post with incorrect password
     //view post with wrong details
-    //view comment with post
     //delete post, all comments and views on post are all deleted
 }
