@@ -3,10 +3,13 @@ package blogPack.services;
 import blogPack.data.model.Comment;
 import blogPack.data.repositories.CommentRepository;
 import blogPack.dto.CommentRequest;
+import blogPack.dto.DeleteCommentRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -34,5 +37,18 @@ public class BlogCommentServices implements CommentServices{
                 count++;
         }
         return count;
+    }
+
+    @Override
+    public void deleteCommentsOnPost(DeleteCommentRequest deleteCommentRequest){
+        List<Comment> commentsFound = commentRepository.findAll();
+        for(Comment comment : commentsFound){
+            if(comment.getPosterUsername().equalsIgnoreCase(deleteCommentRequest.getPosterUsername())
+                       &&
+            comment.getPostTitle().equalsIgnoreCase(deleteCommentRequest.getPostTitle())){
+                commentRepository.delete(comment);
+                commentsFound = commentRepository.findAll();
+            }
+        }
     }
 }

@@ -67,9 +67,9 @@ public class UserServicesImplements implements UserServices{
         validatePassword(deletePostRequest);
         postServices.deletePost(deletePostRequest);
         deletViewsForPost(deletePostRequest);
+        DeleteCommentRequest deleteCommentRequest = new DeleteCommentRequest();
+        deleteCommentOnPost(deleteCommentRequest);
     }
-
-
     public long countViews(){
         return viewService.count();
     }
@@ -78,6 +78,9 @@ public class UserServicesImplements implements UserServices{
                                       .getPassword();
         if(!userPassword.equalsIgnoreCase(deletePostRequest.getPassword()))
             throw new IncorrectPasswordException();
+    }
+    private void deleteCommentOnPost(DeleteCommentRequest deleteCommentRequest){
+        commentServices.deleteCommentsOnPost(deleteCommentRequest);
     }
     private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
