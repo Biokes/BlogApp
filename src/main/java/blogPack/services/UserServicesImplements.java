@@ -19,7 +19,6 @@ public class UserServicesImplements implements UserServices{
     private PostServices postServices;
     private CommentServices commentServices;
     private ViewService viewService;
-    @Override
     public void createUser(RegisterRequest registerRequest){
         User user = new User();
         userRepository.save(Mappers.mapRegister(user, registerRequest));
@@ -52,7 +51,6 @@ public class UserServicesImplements implements UserServices{
         System.out.println(post);
         return Mappers.mapPostResponse(post);
     }
-    @Override
     public void savePost(PostRequest postRequest){
         Post post = new Post();
         Mappers.mapPost(postRequest,post);
@@ -61,19 +59,18 @@ public class UserServicesImplements implements UserServices{
     public long countPosts(){
         return postServices.countNumberOfPosts();
     }
-
-    @Override
     public void updatePost(UpdatePostRequest updatePostRequest){
         confirmUserDetails(updatePostRequest);
         postServices.updatePost(updatePostRequest);
     }
-
-    @Override
     public long countNumberOfCommentsOnPost(CommentDetailsRequest commentDetailsRequest){
         return commentServices.countCommentsOnPost(
                 commentDetailsRequest.getPostTitle( ),
                 commentDetailsRequest.getPosterUsername()
         );
+    }
+    public void deletePostWith(DeletePostRequest deletePostRequest){
+
     }
     private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());

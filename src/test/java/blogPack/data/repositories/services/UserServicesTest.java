@@ -234,7 +234,7 @@ public class UserServicesTest{
         deletePostRequest.setPostTitle("post101");
         deletePostRequest.setPosterUserName("new");
         deletePostRequest.setPassword("pass101");
-
+        userServices.deletePostWith(deletePostRequest);
     }
     //update post that does not exist
     //delete post with incorrect password

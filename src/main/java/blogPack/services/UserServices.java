@@ -21,4 +21,6 @@ public interface UserServices{
     void updatePost(UpdatePostRequest updatePostRequest);
 
     long countNumberOfCommentsOnPost(CommentDetailsRequest commentDetailsRequest);
+
+    void deletePostWith(DeletePostRequest deletePostRequest);
 }
