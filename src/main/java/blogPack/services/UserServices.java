@@ -17,4 +17,6 @@ public interface UserServices{
     void savePost(PostRequest postRequest);
 
     long countPosts();
+
+    void updatePost(UpdatePostRequest updatePostRequest);
 }

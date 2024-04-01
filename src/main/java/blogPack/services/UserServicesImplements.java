@@ -4,6 +4,7 @@ import blogPack.data.model.Post;
 import blogPack.data.model.User;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.*;
+import blogPack.exception.IncorrectPasswordException;
 import blogPack.exception.InvalidUsernameException;
 import blogPack.exception.NoPostMatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,12 @@ public class UserServicesImplements implements UserServices{
         return postServices.countNumberOfPosts();
     }
 
+    @Override
+    public void updatePost(UpdatePostRequest updatePostRequest){
+        confirmUserDetails(updatePostRequest);
+        postServices.updatePost(updatePostRequest);
+    }
+
     private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
         if(userGotten == null){
@@ -79,5 +86,10 @@ public class UserServicesImplements implements UserServices{
         User commenter = findUserBy(commentRequest.getCommenterUsername( ));
         commentRequest.setCommenter(commenter);
         commentServices.save(commentRequest);
+    }
+    private void confirmUserDetails(UpdatePostRequest updatePostRequest){
+        User userFound = findUserBy(updatePostRequest.getPosterUserName( ));
+        if(!userFound.getPassword().equalsIgnoreCase(updatePostRequest.getPosterPassword()))
+            throw new IncorrectPasswordException();
     }
 }

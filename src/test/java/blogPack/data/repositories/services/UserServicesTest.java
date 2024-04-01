@@ -149,7 +149,7 @@ public class UserServicesTest{
         userServices.savePost(postRequest);
         assertEquals(1, userServices.countPosts());
         UpdatePostRequest updatePostRequest = new UpdatePostRequest();
-        userServices.updatePost(updatePostRequest());
+        userServices.updatePost(updatePostRequest);
     }
     //update post
     //delete post

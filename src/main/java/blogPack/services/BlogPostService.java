@@ -51,4 +51,11 @@ public class BlogPostService implements PostServices{
         Post post = new Post();
         Mappers.mapPost(postRequest, post);
     }
+
+    @Override
+    public void updatePost(UpdatePostRequest updatePostRequest){
+        Post postFound = findPostBy(updatePostRequest.getPostTitle());
+        postFound.setContent(updatePostRequest.getPostBody( ));
+        save(postFound);
+    }
 }
