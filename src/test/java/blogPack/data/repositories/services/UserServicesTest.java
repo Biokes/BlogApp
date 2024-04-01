@@ -136,16 +136,23 @@ public class UserServicesTest{
     @Test
     void updatePost_testPostIsUpdated(){
         RegisterRequest request = new RegisterRequest();
-        request.setUserName("userName");
+        request.setUserName("biokes");
         request.setFirstName("FirstName");
         request.setLastName("LastName");
         request.setPassword("my password");
         userServices.createUser(request);
-
+        PostRequest postRequest = new PostRequest();
+        postRequest.setPosterUserName("biokes");
+        postRequest.setTitle("post Title.");
+        postRequest.setPosterUserName("new");
+        postRequest.setContent("postRequest.getContent( )");
+        userServices.savePost(postRequest);
+        assertEquals(1, userServices.countPosts());
+        UpdatePostRequest updatePostRequest = new UpdatePostRequest();
+        userServices.updatePost(updatePostRequest());
     }
     //update post
     //delete post
-    //view post that does not exist
     //update post that does not exist
     //find user that does not exist
     //delete all user post with incorrect password

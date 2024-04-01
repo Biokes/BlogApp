@@ -15,4 +15,6 @@ public interface UserServices{
     ViewPostResponse viewPost(ViewRequest viewRequest);
 
     void savePost(PostRequest postRequest);
+
+    long countPosts();
 }

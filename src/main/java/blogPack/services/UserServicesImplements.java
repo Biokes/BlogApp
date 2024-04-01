@@ -6,7 +6,6 @@ import blogPack.data.repositories.UserRepository;
 import blogPack.dto.*;
 import blogPack.exception.InvalidUsernameException;
 import blogPack.exception.NoPostMatchException;
-import blogPack.exception.PostDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
@@ -61,6 +60,10 @@ public class UserServicesImplements implements UserServices{
         Mappers.mapPost(postRequest,post);
         postServices.save(post);
     }
+    public long countPosts(){
+        return postServices.countNumberOfPosts();
+    }
+
     private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
         if(userGotten == null){
