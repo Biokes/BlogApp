@@ -24,4 +24,13 @@ public class BlogCommentServices implements CommentServices{
     public void deleteAll(){
         commentRepository.deleteAll();
     }
+
+    public long countCommentsOnPost(String postTitle, String posterUsername){
+        long count = 0l;
+        for(Comment comment : commentRepository.findAll()){
+            if(comment.getPosterUsername().equalsIgnoreCase(posterUsername) && comment.getPostTitle().equalsIgnoreCase(postTitle))
+                count++;
+        }
+        return count;
+    }
 }

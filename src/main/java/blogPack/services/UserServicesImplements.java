@@ -29,7 +29,7 @@ public class UserServicesImplements implements UserServices{
     public long countNumberOfUsers(){
         return userRepository.count( );
     }
-    public void addCommentToPost(CommentRequest commentRequest){
+    public void commentOnPostWith(CommentRequest commentRequest){
         Post post = postServices.findPostBy(commentRequest.getPostTitle());
         saveComment(commentRequest);
     }
@@ -69,6 +69,14 @@ public class UserServicesImplements implements UserServices{
     public void updatePost(UpdatePostRequest updatePostRequest){
         confirmUserDetails(updatePostRequest);
         postServices.updatePost(updatePostRequest);
+    }
+
+    @Override
+    public long countNumberOfCommentsOnPost(CommentDetailsRequest commentDetailsRequest){
+        return commentServices.countCommentsOnPost(
+                commentDetailsRequest.getPostTitle( ),
+                commentDetailsRequest.getPosterUsername()
+        );
     }
 
     private void validatePoster(ViewRequest viewRequest){

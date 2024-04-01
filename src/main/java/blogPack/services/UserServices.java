@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public interface UserServices{
     void createUser(RegisterRequest registerRequest);
     long countNumberOfUsers();
-    void addCommentToPost(CommentRequest commentRequest);
+    void commentOnPostWith(CommentRequest commentRequest);
     void deleteAll();
     long countViewsOnPostWith(ViewsCountRequest viewCountRequest);
     long countNumberOfComments();
@@ -19,4 +19,6 @@ public interface UserServices{
     long countPosts();
 
     void updatePost(UpdatePostRequest updatePostRequest);
+
+    long countNumberOfCommentsOnPost(CommentDetailsRequest commentDetailsRequest);
 }

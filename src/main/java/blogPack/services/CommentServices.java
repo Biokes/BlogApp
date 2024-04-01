@@ -11,4 +11,6 @@ public interface CommentServices{
 
     void save(CommentRequest commentRequest);
     void deleteAll();
+
+    long countCommentsOnPost(String postTitle, String posterUserName);
 }

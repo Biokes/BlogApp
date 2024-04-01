@@ -68,7 +68,7 @@ public class UserServicesTest{
         request1.setPassword("my password");
         userServices.createUser(request1);
         assertEquals(0, userServices.countNumberOfComments());
-        userServices.addCommentToPost(commentRequest);
+        userServices.commentOnPostWith(commentRequest);
         assertEquals(1, commentServices.countNumberOfComments());
     }
     @Test
@@ -86,7 +86,7 @@ public class UserServicesTest{
         commentRequest.setPostTitle("post Title.");
         commentRequest.setPosterName("userName");
         assertEquals(0, postServices.countNumberOfPosts());
-        assertThrows(PostDoesNotExistException.class, ()->userServices.addCommentToPost(commentRequest));
+        assertThrows(PostDoesNotExistException.class, ()->userServices.commentOnPostWith(commentRequest));
     }
     @Test
     void viewPost_testPostIsViewed(){
@@ -162,8 +162,42 @@ public class UserServicesTest{
         assertEquals("my post", response.getPostTitle());
         assertEquals("updating my post for a check", response.getPostbody());
     }
+    @Test void updatePost_testCommentsAreNotAffected(){
+        RegisterRequest request = new RegisterRequest();
+        request.setUserName("biokes");
+        request.setFirstName("FirstName");
+        request.setLastName("LastName");
+        request.setPassword("my password");
+        userServices.createUser(request);
+        PostRequest postRequest = new PostRequest();
+        postRequest.setPosterUserName("biokes");
+        postRequest.setTitle("post101");
+        postRequest.setContent("postRequest.getContent( )");
+        userServices.savePost(postRequest);
+        assertEquals(1, userServices.countPosts());
+        CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice");
+        commentRequest.setCommenterUsername("biokes");
+        commentRequest.setPostTitle("post101");
+        commentRequest.setPosterName("biokes");
+        assertEquals(0,userServices.countNumberOfComments());
+        userServices.commentOnPostWith(commentRequest);
+        assertEquals(1,userServices.countNumberOfComments());
+        UpdatePostRequest updatePostRequest = new UpdatePostRequest();
+        updatePostRequest.setPostTitle("post101");
+        updatePostRequest.setPosterPassword("my password");
+        updatePostRequest.setPosterUserName("biokes");
+        updatePostRequest.setPostBody("updating my post for a check");
+        userServices.updatePost(updatePostRequest);
+        CommentDetailsRequest details= new CommentDetailsRequest();
+        details.setPosterUsername("biokes");
+        details.setPostTitle("post101");
+        assertEquals(1,userServices.countNumberOfCommentsOnPost(details));
+    }
     //delete post
     //update post that does not exist
     //delete post with incorrect password
     //view post with wrong details
+    //view comment with post
+    //delete post, all comments and views on post are all deleted
 }

@@ -21,6 +21,7 @@ public class Mappers{
         comment.setCommenter(commentRequest.getCommenter());
         comment.setCommentBody(commentRequest.getCommentBody( ));
         comment.setTimeOfComment(LocalDateTime.now( ));
+        commentRequest.setPosterName(commentRequest.getPosterName( ));
         comment.setPostTitle(commentRequest.getPostTitle( ));
     }
 
