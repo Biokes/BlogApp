@@ -1,5 +1,4 @@
 package blogPack.services;
-
 import blogPack.data.model.Post;
 import blogPack.data.repositories.PostRepositpory;
 import blogPack.dto.*;
@@ -9,9 +8,7 @@ import blogPack.exception.PostDoesNotExistException;
 import utilities.Mappers;
 
 import java.util.List;
-
 @Service
-
 public class BlogPostService implements PostServices{
     @Autowired
     private PostRepositpory postRepositpory;
