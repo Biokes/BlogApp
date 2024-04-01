@@ -2,6 +2,7 @@ package blogPack.data.repositories.services;
 
 import blogPack.data.model.Post;
 import blogPack.dto.*;
+import blogPack.exception.IncorrectPasswordException;
 import blogPack.exception.NoPostMatchException;
 import blogPack.services.CommentServices;
 import blogPack.services.PostServices;
@@ -232,11 +233,53 @@ public class UserServicesTest{
         userServices.commentOnPostWith(commentRequest);
         assertEquals(2,userServices.countNumberOfComments());
         DeletePostRequest deletePostRequest = new DeletePostRequest();
-        deletePostRequest.setPostTitle("post101");
+        deletePostRequest.setPostTitle("post title.");
         deletePostRequest.setPosterUserName("new");
         deletePostRequest.setPassword("pass101");
         userServices.deletePostWith(deletePostRequest);
         assertEquals(0, userServices.countPosts());
+    }
+    @Test void deletePostWithIncorrectPassword_testExceptionIsThrown(){
+        RegisterRequest request= new RegisterRequest();
+        request.setFirstName("newUser");
+        request.setUserName("new");
+        request.setLastName("newLastName");
+        request.setPassword("pass101");
+        userServices.createUser(request);
+        Post post = new Post();
+        PostRequest postRequest = new PostRequest();
+        postRequest.setPosterUserName("new");
+        postRequest.setTitle("post Title.");
+        postRequest.setContent("new  post to test the code");
+        post.setTitle(postRequest.getTitle());
+        postRequest.setContent(postRequest.getContent( ));
+        userServices.savePost(postRequest);
+        assertEquals(1, userServices.countPosts());
+        ViewRequest viewRequest = new ViewRequest();
+        viewRequest.setPosterUsername("new");
+        viewRequest.setPostTitle("post title.");
+        viewRequest.setViewerUsername("new");
+        userServices.viewPost(viewRequest);
+        CommentRequest commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice");
+        commentRequest.setCommenterUsername("new");
+        commentRequest.setPostTitle("post title.");
+        commentRequest.setPosterName("new");
+        assertEquals(0,userServices.countNumberOfComments());
+        userServices.commentOnPostWith(commentRequest);
+        commentRequest = new CommentRequest();
+        commentRequest.setCommentBody("nice \ni ❤️ dis");
+        commentRequest.setCommenterUsername("new");
+        commentRequest.setPostTitle("post title.");
+        commentRequest.setPosterName("new");
+        assertEquals(1,userServices.countNumberOfComments());
+        userServices.commentOnPostWith(commentRequest);
+        assertEquals(2,userServices.countNumberOfComments());
+        DeletePostRequest deletePostRequest = new DeletePostRequest();
+        deletePostRequest.setPostTitle("post title.");
+        deletePostRequest.setPosterUserName("new");
+        deletePostRequest.setPassword("pass101");
+        assertThrows(IncorrectPasswordException.class,()->userServices.deletePostWith(deletePostRequest));
     }
     //update post that does not exist
     //delete post with incorrect password

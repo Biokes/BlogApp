@@ -8,17 +8,12 @@ import blogPack.exception.IncorrectPasswordException;
 import blogPack.exception.InvalidUsernameException;
 import blogPack.exception.NoPostMatchException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
 @Service
 @AllArgsConstructor
 public class UserServicesImplements implements UserServices{
-    private UserRepository userRepository;
-    private PostServices postServices;
-    private CommentServices commentServices;
-    private ViewService viewService;
     public void createUser(RegisterRequest registerRequest){
         User user = new User();
         userRepository.save(Mappers.mapRegister(user, registerRequest));
@@ -70,7 +65,14 @@ public class UserServicesImplements implements UserServices{
         );
     }
     public void deletePostWith(DeletePostRequest deletePostRequest){
+        validatePassword(deletePostRequest);
         postServices.deletePost(deletePostRequest);
+    }
+    private void validatePassword(DeletePostRequest deletePostRequest){
+        String userPassword = findUserBy(deletePostRequest.getPosterUserName())
+                                      .getPassword();
+        if(!userPassword.equalsIgnoreCase(deletePostRequest.getPassword()))
+            throw new IncorrectPasswordException();
     }
     private void validatePoster(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
@@ -93,4 +95,8 @@ public class UserServicesImplements implements UserServices{
         if(!userFound.getPassword().equalsIgnoreCase(updatePostRequest.getPosterPassword()))
             throw new IncorrectPasswordException();
     }
+    private UserRepository userRepository;
+    private PostServices postServices;
+    private CommentServices commentServices;
+    private ViewService viewService;
 }
