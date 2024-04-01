@@ -6,6 +6,4 @@ import lombok.Data;
 public class DeleteCommentRequest{
     private String posterUsername;
     private String postTitle;
-    public String getPostTitle(){
-    }
 }
