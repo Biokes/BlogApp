@@ -66,11 +66,10 @@ public class UserServicesImplements implements UserServices{
     public void deletePostWith(DeletePostRequest deletePostRequest){
         validatePassword(deletePostRequest);
         postServices.deletePost(deletePostRequest);
-        DeleteViewRequest deleteViewRequest = new DeleteViewRequest();
-        deleteViewRequest.setPostTitle(deletePostRequest.getPostTitle( ));
-        deleteViewRequest.setPosterUsername(deletePostRequest.getPosterUserName());
-        viewService.deleteViewsWith(deleteViewRequest);
+        deletViewsForPost(deletePostRequest);
     }
+
+
     public long countViews(){
         return viewService.count();
     }
@@ -95,6 +94,12 @@ public class UserServicesImplements implements UserServices{
         User commenter = findUserBy(commentRequest.getCommenterUsername( ));
         commentRequest.setCommenter(commenter);
         commentServices.save(commentRequest);
+    }
+    private void deletViewsForPost(DeletePostRequest deletePostRequest){
+        DeleteViewRequest deleteViewRequest = new DeleteViewRequest();
+        deleteViewRequest.setPostTitle(deletePostRequest.getPostTitle( ));
+        deleteViewRequest.setPosterUsername(deletePostRequest.getPosterUserName());
+        viewService.deleteViewsWith(deleteViewRequest);
     }
     private void confirmUserDetails(UpdatePostRequest updatePostRequest){
         User userFound = findUserBy(updatePostRequest.getPosterUserName( ));
