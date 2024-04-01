@@ -332,7 +332,8 @@ public class UserServicesTest{
         assertEquals(0, userServices.countNumberOfCommentsOnPost(detailsRequest));
         assertEquals(0,userServices.countViews());
     }
-    //test no every userName is dynamic
+    //test no every userName is unique
+    //test post unique title for a user
     // test anonymous view
     //test view post comes with comments and views
 }

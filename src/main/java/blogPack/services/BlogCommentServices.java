@@ -47,8 +47,8 @@ public class BlogCommentServices implements CommentServices{
                        &&
             comment.getPostTitle().equalsIgnoreCase(deleteCommentRequest.getPostTitle())){
                 commentRepository.delete(comment);
-                commentsFound = commentRepository.findAll();
             }
+            commentsFound = commentRepository.findAll();
         }
     }
 }
