@@ -16,7 +16,7 @@ public class BlogPostService implements PostServices{
     @Autowired
     private PostRepositpory postRepositpory;
     public long countNumberOfPosts(){
-        return postRepositpory.count( );
+        return postRepositpory.count();
     }
     public void save(Post post){
         postRepositpory.save(post);
@@ -34,7 +34,6 @@ public class BlogPostService implements PostServices{
             }
 
         }
-    @Override
     public Post findPostBy(String postTitle){
         Post foundPost = new Post();
         List<Post> postList = postRepositpory.findAll();
@@ -45,14 +44,10 @@ public class BlogPostService implements PostServices{
         if(foundPost.getTitle() == null) throw new PostDoesNotExistException();
      return foundPost;
     }
-
-    @Override
     public void createPost(PostRequest postRequest){
         Post post = new Post();
         Mappers.mapPost(postRequest, post);
     }
-
-    @Override
     public void updatePost(UpdatePostRequest updatePostRequest){
         Post postFound = findPostBy(updatePostRequest.getPostTitle());
         postFound.setContent(updatePostRequest.getPostBody( ));
