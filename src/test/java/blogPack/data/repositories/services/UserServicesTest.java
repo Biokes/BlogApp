@@ -107,12 +107,12 @@ public class UserServicesTest{
         assertEquals(1, postServices.countNumberOfPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
-        viewRequest.setPostTitle("post title");
+        viewRequest.setPostTitle("post title.");
         viewRequest.setViewerUsername("new");
         userServices.viewPost(viewRequest);
         ViewsCountRequest viewCountRequest = new ViewsCountRequest();
-        viewCountRequest.setPostTitle("post title");
-        viewCountRequest.setPosterUsername("userName");
+        viewCountRequest.setPostTitle("post title.");
+        viewCountRequest.setPosterUsername("new");
         assertEquals(1, userServices.countViewsOnPostWith(viewCountRequest));
     }
     @Test
@@ -133,8 +133,16 @@ public class UserServicesTest{
         viewCountRequest.setPosterUsername("userName");
         assertThrows(PostDoesNotExistException.class,()-> userServices.countViewsOnPostWith(viewCountRequest));
     }
-    //view post that is not created yet to throw exception
-    // create a post with userName that does not exist
+    @Test
+    void updatePost_testPostIsUpdated(){
+        RegisterRequest request = new RegisterRequest();
+        request.setUserName("userName");
+        request.setFirstName("FirstName");
+        request.setLastName("LastName");
+        request.setPassword("my password");
+        userServices.createUser(request);
+
+    }
     //update post
     //delete post
     //view post that does not exist
