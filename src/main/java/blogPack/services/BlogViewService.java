@@ -38,7 +38,15 @@ public class BlogViewService implements ViewService{
         return viewRepository.findAll().size();
     }
     public void deleteViewsWith(DeleteViewRequest deleteViewRequest){
-
+        List<Views> allViews = viewRepository.findAll();
+        for(Views view : allViews){
+            if(view.getPosterUsername().equals(deleteViewRequest.getPosterUsername())
+            &&
+            view.getPostTitle().equalsIgnoreCase(deleteViewRequest.getPostTitle( ))){
+                viewRepository.delete(view);
+            }
+            allViews = viewRepository.findAll();
+        }
     }
     private ViewRepository viewRepository;
 }

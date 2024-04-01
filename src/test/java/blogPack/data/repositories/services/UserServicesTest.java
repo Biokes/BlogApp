@@ -329,8 +329,9 @@ public class UserServicesTest{
         CommentDetailsRequest detailsRequest = new CommentDetailsRequest();
         detailsRequest.setPosterUsername("new");
         detailsRequest.setPostTitle("post title.");
-        assertEquals(0, userServices.countNumberOfCommentsOnPost(detailsRequest));
         assertEquals(0,userServices.countViews());
+        assertEquals(0, userServices.countNumberOfCommentsOnPost(detailsRequest));
+
     }
     //test no every userName is unique
     //test post unique title for a user
