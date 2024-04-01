@@ -189,6 +189,7 @@ public class UserServicesTest{
         updatePostRequest.setPosterUserName("biokes");
         updatePostRequest.setPostBody("updating my post for a check");
         userServices.updatePost(updatePostRequest);
+        assertEquals(1,userServices.countNumberOfComments());
         CommentDetailsRequest details= new CommentDetailsRequest();
         details.setPosterUsername("biokes");
         details.setPostTitle("post101");
