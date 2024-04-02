@@ -294,15 +294,13 @@ public class UserServicesTest{
         request.setLastName("newLastName");
         request.setPassword("pass101");
         userServices.createUser(request);
-        Post post = new Post();
         PostRequest postRequest = new PostRequest();
         postRequest.setPosterUserName("new");
         postRequest.setTitle("post Title.");
         postRequest.setContent("new  post to test the code");
-        post.setTitle(postRequest.getTitle());
+        postRequest.setTitle(postRequest.getTitle());
         postRequest.setContent(postRequest.getContent( ));
         userServices.savePost(postRequest);
-        assertEquals(1, userServices.countPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
         viewRequest.setPostTitle("post title.");
@@ -312,6 +310,7 @@ public class UserServicesTest{
         countRequest.setPosterUsername("new");
         countRequest.setPostTitle("post title.");
         countRequest.setViewerUsername("new012");
+        assertEquals(1, userServices.countPosts());
         assertEquals(1,userServices.countViewsOnPostWith(countRequest));
         userServices.viewPost(viewRequest);
         CommentRequest commentRequest = new CommentRequest();
@@ -320,20 +319,20 @@ public class UserServicesTest{
         commentRequest.setPostTitle("post title.");
         commentRequest.setPosterName("new");
         userServices.commentOnPostWith(commentRequest);
+        CommentDetailsRequest detailsRequest = new CommentDetailsRequest();
+        detailsRequest.setPosterUsername("new");
+        detailsRequest.setPostTitle("post title.");
+        assertEquals(1, userServices.countNumberOfCommentsOnPost(detailsRequest));
         DeletePostRequest deletePostRequest = new DeletePostRequest();
         deletePostRequest.setPostTitle("post title.");
         deletePostRequest.setPosterUserName("new");
         deletePostRequest.setPassword("pass101");
         userServices.deletePostWith(deletePostRequest);
         assertEquals(0, userServices.countPosts());
-        CommentDetailsRequest detailsRequest = new CommentDetailsRequest();
-        detailsRequest.setPosterUsername("new");
-        detailsRequest.setPostTitle("post title.");
         assertEquals(0,userServices.countViews());
-        assertEquals(0, userServices.countNumberOfCommentsOnPost(detailsRequest));
-
+        assertEquals(0, userServices.countNumberOfComments());
     }
-    //test no every userName is unique
+    //test every userName is unique
     //test post unique title for a user
     // test anonymous view
     //test view post comes with comments and views

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,14 +42,23 @@ public class BlogCommentServices implements CommentServices{
 
     @Override
     public void deleteCommentsOnPost(DeleteCommentRequest deleteCommentRequest){
-        List<Comment> commentsFound = commentRepository.findAll();
-        for(Comment comment : commentsFound){
-            if(comment.getPosterUsername().equalsIgnoreCase(deleteCommentRequest.getPosterUsername())
-                       &&
-            comment.getPostTitle().equalsIgnoreCase(deleteCommentRequest.getPostTitle())){
-                commentRepository.delete(comment);
-            }
-            commentsFound = commentRepository.findAll();
+       List<Comment> commentList = findPostComments(deleteCommentRequest);
+       for(Comment comment : commentList){
+           commentRepository.delete(comment);
         }
+    }
+    private List<Comment> findPostComments(DeleteCommentRequest deleteCommentRequest){
+        List<Comment> allComments = commentRepository.findAll();
+        List<Comment> postComments = new ArrayList<>();
+        for(Comment comment : allComments){
+            if(comment.getPosterUsername().equalsIgnoreCase(deleteCommentRequest.getPosterUsername())
+                && comment.getPostTitle().equalsIgnoreCase(deleteCommentRequest.getPostTitle())){
+                postComments.add(comment);
+            }
+        }
+        return postComments;
+    }
+    private void refresh(List<Comment> anything){
+        anything = commentRepository.findAll();
     }
 }
