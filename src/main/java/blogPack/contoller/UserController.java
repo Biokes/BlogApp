@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class UserController{
     private UserServices userServices;
-    @PostMapping("/Register")
+    @PostMapping("/Blog-Register_user")
     public String registerUser(@RequestBody RegisterRequest registerRequest){
         try{
            userServices.createUser(registerRequest);
