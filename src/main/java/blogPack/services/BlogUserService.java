@@ -5,20 +5,18 @@ import blogPack.data.model.User;
 import blogPack.data.model.Views;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.*;
-import blogPack.exception.IncorrectPasswordException;
-import blogPack.exception.InvalidUsernameException;
-import blogPack.exception.NoPostMatchException;
+import blogPack.exception.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
 import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class BlogUserService implements UserServices{
     public void createUser(RegisterRequest registerRequest){
         User user = new User();
+        validateRegisterUsername(registerRequest.getUserName());
         userRepository.save(Mappers.mapRegister(user, registerRequest));
    }
     public long countNumberOfUsers(){
@@ -127,6 +125,12 @@ public class BlogUserService implements UserServices{
         User userFound = findUserBy(updatePostRequest.getPosterUserName( ));
         if(!userFound.getPassword().equalsIgnoreCase(updatePostRequest.getPosterPassword()))
             throw new IncorrectPasswordException();
+    }
+    private void validateRegisterUsername(String username){
+        try{findUserBy(username);
+        throw new UsernameAlreadyExistException();
+        }catch( BlogExceptions ignored ){
+        }
     }
     private UserRepository userRepository;
     private PostServices postServices;
