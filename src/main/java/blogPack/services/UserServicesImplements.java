@@ -65,9 +65,9 @@ public class UserServicesImplements implements UserServices{
     public void deletePostWith(DeletePostRequest deletePostRequest){
         validatePassword(deletePostRequest);
         postServices.deletePost(deletePostRequest);
-        deletViewsForPost(deletePostRequest);
         DeleteCommentRequest deleteCommentRequest = new DeleteCommentRequest();
         deleteCommentOnPost(deleteCommentRequest);
+        deletViewsForPost(deletePostRequest);
     }
     public long countViews(){
         return viewService.count();
