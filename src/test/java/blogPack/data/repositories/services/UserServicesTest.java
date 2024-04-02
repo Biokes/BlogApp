@@ -7,6 +7,7 @@ import blogPack.exception.NoPostMatchException;
 import blogPack.services.CommentServices;
 import blogPack.services.PostServices;
 import blogPack.services.UserServices;
+import blogPack.services.ViewService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ public class UserServicesTest{
     private PostServices postServices;
     @Autowired
     private CommentServices commentServices;
+    @Autowired
+    private ViewService viewService;
     @BeforeEach void wipe(){
+        viewService.deleteAll();
         postServices.deleteAll( );
         userServices.deleteAll();
         commentServices.deleteAll();
@@ -205,7 +209,6 @@ public class UserServicesTest{
         postRequest.setContent(postRequest.getContent( ));
         userServices.savePost(postRequest);
         assertEquals(1, userServices.countPosts());
-
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
         viewRequest.setPostTitle("post title.");
@@ -348,7 +351,6 @@ public class UserServicesTest{
         viewRequest.setPostTitle("post1");
         viewRequest.setViewerUsername("jamesHarden");
         ViewPostResponse response = userServices.viewPost(viewRequest);
-        System.out.println(response);
         assertEquals(1, response.getViewersCount());
     }
     //test every userName is unique

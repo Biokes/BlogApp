@@ -41,9 +41,7 @@ public void viewWith(ViewRequest viewRequest, User userGiven){
     }
     public void deleteViewsWith(DeleteViewRequest deleteViewRequest){
         List<Views> allViews = findpostViews(deleteViewRequest);
-        for(Views view : allViews){
-            viewRepository.delete(view);
-        }
+            viewRepository.deleteAll(allViews);
     }
     public List<Views> getViewsWith(ViewRequest viewRequest){
         List<Views> viewsList = new ArrayList<>();
@@ -56,6 +54,9 @@ public void viewWith(ViewRequest viewRequest, User userGiven){
             }
         }
         return viewsList;
+    }
+    public void deleteAll(){
+        viewRepository.deleteAll();
     }
     private List<Views> findpostViews(DeleteViewRequest deleteViewRequest){
         List<Views> allViews= viewRepository.findAll();

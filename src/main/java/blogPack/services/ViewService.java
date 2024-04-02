@@ -16,4 +16,5 @@ public interface ViewService{
     long count();
     void deleteViewsWith(DeleteViewRequest deleteViewRequest);
     List<Views> getViewsWith(ViewRequest viewRequest);
+    void deleteAll();
 }

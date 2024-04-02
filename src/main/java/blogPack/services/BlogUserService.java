@@ -47,7 +47,6 @@ public class BlogUserService implements UserServices{
         views.setViewer(findUserBy(viewRequest.getViewerUsername()));
         return getAllViewsOnPost(viewRequest);
     }
-
     public void savePost(PostRequest postRequest){
         Post post = new Post();
         Mappers.mapPost(postRequest,post);
