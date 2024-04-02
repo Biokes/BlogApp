@@ -33,8 +33,6 @@
             <version>3.2.4</version>
             <scope>test</scope>
         </dependency>
-
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,8 +44,6 @@
             <artifactId>mongodb-driver-core</artifactId>
             <version>4.11.1</version>
         </dependency>
-
-
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
