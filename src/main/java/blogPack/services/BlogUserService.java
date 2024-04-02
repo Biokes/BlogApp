@@ -52,11 +52,9 @@ public class BlogUserService implements UserServices{
         ViewPostResponse response = Mappers.mapPostResponse(post);
         return Mappers.mapViewsWithResponse(viewsList, response);
     }
-
     private void validateViewer(ViewRequest viewRequest){
     findUserBy(viewRequest.getViewerUsername());
     }
-
     public void savePost(PostRequest postRequest){
         Post post = new Post();
         Mappers.mapPost(postRequest,post);
