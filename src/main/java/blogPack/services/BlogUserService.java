@@ -44,6 +44,7 @@ public class BlogUserService implements UserServices{
     public ViewPostResponse viewPost(ViewRequest viewRequest){
         validate(viewRequest);
         Views views = new Views();
+        for(int count = 0 ; count++ < 2;)
         views.setViewer(findUserBy(viewRequest.getViewerUsername()));
         return getAllViewsOnPost(viewRequest);
     }
