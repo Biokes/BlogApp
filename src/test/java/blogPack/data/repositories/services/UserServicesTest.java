@@ -372,5 +372,4 @@ public class UserServicesTest{
         assertThrows(UsernameAlreadyExistException.class, ()->userServices.createUser(finalRequest));
         assertEquals(1,userServices.countNumberOfUsers());
     }
-    // test anonymous view
-}
+    }
