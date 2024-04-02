@@ -48,9 +48,12 @@ public void viewWith(ViewRequest viewRequest, User userGiven){
     public List<Views> getViewsWith(ViewRequest viewRequest){
         List<Views> viewsList = new ArrayList<>();
         for(Views view: viewRepository.findAll()){
-            if(view.getPostTitle().equalsIgnoreCase(viewRequest.getPostTitle( )) &&
-                       view.getPosterUsername().equalsIgnoreCase(viewRequest.getPosterUsername( )))
+            if(view.getPostTitle().equalsIgnoreCase(viewRequest.getPostTitle( ))
+            &&
+            view.getPosterUsername().equalsIgnoreCase(viewRequest.getPosterUsername( ))){
+//                view.set
                 viewsList.add(view);
+            }
         }
         return viewsList;
     }

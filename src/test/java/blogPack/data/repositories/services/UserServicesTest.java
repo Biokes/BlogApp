@@ -205,6 +205,7 @@ public class UserServicesTest{
         postRequest.setContent(postRequest.getContent( ));
         userServices.savePost(postRequest);
         assertEquals(1, userServices.countPosts());
+
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
         viewRequest.setPostTitle("post title.");

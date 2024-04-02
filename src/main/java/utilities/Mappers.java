@@ -41,12 +41,11 @@ public class Mappers{
 
     public static ViewPostResponse  mapPostResponse(Post foundPost){
         ViewPostResponse response = new ViewPostResponse();
-        response.setPostbody(foundPost.getContent( ));
+        response.setPostbody(foundPost.getContent());
         response.setPostTitle(foundPost.getTitle());
         response.setDateCreated(foundPost.getDateCreated());
         return response;
     }
-
     public static ViewPostResponse mapViewsWithResponse(List<Views> viewsList, ViewPostResponse response){
         StringBuilder viewDetails = new StringBuilder();
         int count =0;

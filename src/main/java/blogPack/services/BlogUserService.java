@@ -42,19 +42,12 @@ public class BlogUserService implements UserServices{
         return userRepository.findUserByUserName(posterUsername);
     }
     public ViewPostResponse viewPost(ViewRequest viewRequest){
-//        User userGotten = findUserBy(viewRequest.getPosterUsername());
-        validatePoster(viewRequest);
-        validateViewer(viewRequest);
-        User viewer = findUserBy(viewRequest.getViewerUsername());
-        viewService.viewWith(viewRequest, viewer);
-        Post post = postServices.findPostBy(viewRequest.getPostTitle());
-        List<Views> viewsList = viewService.getViewsWith(viewRequest);
-        ViewPostResponse response = Mappers.mapPostResponse(post);
-        return Mappers.mapViewsWithResponse(viewsList, response);
+        validate(viewRequest);
+        Views views = new Views();
+        views.setViewer(findUserBy(viewRequest.getViewerUsername()));
+        return getAllViewsOnPost(viewRequest);
     }
-    private void validateViewer(ViewRequest viewRequest){
-    findUserBy(viewRequest.getViewerUsername());
-    }
+
     public void savePost(PostRequest postRequest){
         Post post = new Post();
         Mappers.mapPost(postRequest,post);
@@ -84,6 +77,18 @@ public class BlogUserService implements UserServices{
     public long countViews(){
         return viewService.count();
     }
+    private ViewPostResponse getAllViewsOnPost(ViewRequest viewRequest){
+        Post post = postServices.findPostBy(viewRequest.getPostTitle());
+        User viewer = findUserBy(viewRequest.getViewerUsername());
+        List<Views> viewsList = viewService.getViewsWith(viewRequest);
+        ViewPostResponse response = Mappers.mapPostResponse(post);
+        viewService.viewWith(viewRequest, viewer);
+        response.setViews(response.getViews());
+        return Mappers.mapViewsWithResponse(viewsList, response);
+    }
+    private void validateViewer(ViewRequest viewRequest){
+        findUserBy(viewRequest.getViewerUsername());
+    }
     private void validatePassword(DeletePostRequest deletePostRequest){
         String userPassword = findUserBy(deletePostRequest.getPosterUserName())
                                       .getPassword();
@@ -102,6 +107,10 @@ public class BlogUserService implements UserServices{
     private void validateComment(CommentRequest commentRequest){
         User commenter = findUserBy(commentRequest.getCommenterUsername( ));
         if(commenter == null) throw new InvalidUsernameException();
+    }
+    private void validate(ViewRequest viewRequest){
+        validatePoster(viewRequest);
+        validateViewer(viewRequest);
     }
     private void saveComment(CommentRequest commentRequest){
         validateComment(commentRequest);
