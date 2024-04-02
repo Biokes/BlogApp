@@ -2,6 +2,7 @@ package blogPack.services;
 
 import blogPack.data.model.Post;
 import blogPack.data.model.User;
+import blogPack.data.model.Views;
 import blogPack.data.repositories.UserRepository;
 import blogPack.dto.*;
 import blogPack.exception.IncorrectPasswordException;
@@ -10,9 +11,12 @@ import blogPack.exception.NoPostMatchException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
+
+import java.util.List;
+
 @Service
 @AllArgsConstructor
-public class UserServicesImplements implements UserServices{
+public class BlogUserService implements UserServices{
     public void createUser(RegisterRequest registerRequest){
         User user = new User();
         userRepository.save(Mappers.mapRegister(user, registerRequest));
@@ -42,7 +46,9 @@ public class UserServicesImplements implements UserServices{
         validatePoster(viewRequest);
         viewService.viewWith(viewRequest, userGotten);
         Post post = postServices.findPostBy(viewRequest.getPostTitle());
-        return Mappers.mapPostResponse(post);
+        List<Views> viewsList = viewService.getViewsWith(viewRequest);
+        ViewPostResponse response = Mappers.mapPostResponse(post);
+        return Mappers.mapViewsWithResponse(viewsList, response);
     }
     public void savePost(PostRequest postRequest){
         Post post = new Post();

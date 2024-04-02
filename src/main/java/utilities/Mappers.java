@@ -8,6 +8,7 @@ import blogPack.dto.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Mappers{
     public static User mapRegister(User userToBeCreated, RegisterRequest registerRequest){
@@ -38,11 +39,24 @@ public class Mappers{
         post.setContent(postRequest.getContent( ));
     }
 
-    public static ViewPostResponse mapPostResponse(Post foundPost){
+    public static ViewPostResponse  mapPostResponse(Post foundPost){
         ViewPostResponse response = new ViewPostResponse();
         response.setPostbody(foundPost.getContent( ));
         response.setPostTitle(foundPost.getTitle());
         response.setDateCreated(foundPost.getDateCreated());
+        return response;
+    }
+
+    public static ViewPostResponse mapViewsWithResponse(List<Views> viewsList, ViewPostResponse response){
+        StringBuilder viewDetails = new StringBuilder();
+        int count =0;
+        for(Views views : viewsList){
+            viewDetails.append(String.format("Viewer %s : %s\nTime of View : %s\n\n",++count,
+                    views.getViewer().getUserName(),
+                    views.getTimeViewed()));
+        }
+        response.setViews(viewDetails.toString());
+        response.setViewersCount(count);
         return response;
     }
 }

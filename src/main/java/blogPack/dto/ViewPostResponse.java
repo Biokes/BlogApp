@@ -9,4 +9,5 @@ public class ViewPostResponse{
     private String postbody;
     private LocalDate dateCreated;
     private long viewersCount;
+    private String views;
 }

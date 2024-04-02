@@ -338,15 +338,16 @@ public class UserServicesTest{
         request.setPassword("12345");
         userServices.createUser(request);
         PostRequest postRequest = new PostRequest();
-        postRequest.setPosterUserName("new");
+        postRequest.setPosterUserName("maya");
         postRequest.setTitle("post1");
         postRequest.setContent("contents of post 1");
         userServices.savePost(postRequest);
         ViewRequest viewRequest = new ViewRequest();
-        viewRequest.setPosterUsername("new");
+        viewRequest.setPosterUsername("maya");
         viewRequest.setPostTitle("post1");
-        viewRequest.setViewerUsername("new012");
+        viewRequest.setViewerUsername("jamesHarden");
         ViewPostResponse response = userServices.viewPost(viewRequest);
+        System.out.println(response);
         assertEquals(1, response.getViewersCount());
     }
     //test every userName is unique
