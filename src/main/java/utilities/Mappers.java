@@ -50,6 +50,7 @@ public class Mappers{
     public static ViewPostResponse mapViewsWithResponse(List<Views> viewsList, ViewPostResponse response){
         StringBuilder viewDetails = new StringBuilder();
         int count =0;
+        if(!viewsList.isEmpty())
         for(Views views : viewsList){
             viewDetails.append(String.format("Viewer %s : %s\nTime of View : %s\n\n",++count,
                     views.getViewer().getUserName(),

@@ -44,12 +44,18 @@ public class BlogUserService implements UserServices{
     public ViewPostResponse viewPost(ViewRequest viewRequest){
         User userGotten = findUserBy(viewRequest.getPosterUsername());
         validatePoster(viewRequest);
+        validateViewer(viewRequest);
         viewService.viewWith(viewRequest, userGotten);
         Post post = postServices.findPostBy(viewRequest.getPostTitle());
         List<Views> viewsList = viewService.getViewsWith(viewRequest);
         ViewPostResponse response = Mappers.mapPostResponse(post);
         return Mappers.mapViewsWithResponse(viewsList, response);
     }
+
+    private void validateViewer(ViewRequest viewRequest){
+        findUserBy(viewRequest.getViewerUsername( ));
+    }
+
     public void savePost(PostRequest postRequest){
         Post post = new Post();
         Mappers.mapPost(postRequest,post);
