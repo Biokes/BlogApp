@@ -13,6 +13,7 @@ import utilities.Mappers;
 import java.util.List;
 
 import static utilities.Validate.validateCommentRequest;
+import static utilities.Validate.validateDeletePostRequest;
 
 @Service
 @AllArgsConstructor
@@ -69,6 +70,7 @@ public class BlogUserService implements UserServices{
         );
     }
     public void deletePostWith(DeletePostRequest deletePostRequest){
+        validateDeletePostRequest(deletePostRequest);
         validatePassword(deletePostRequest);
         postServices.deletePost(deletePostRequest);
         DeleteCommentRequest deleteCommentRequest = new DeleteCommentRequest();
