@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
 import java.util.List;
+
+import static utilities.Validate.validateCommentRequest;
+
 @Service
 @AllArgsConstructor
 public class BlogUserService implements UserServices{
@@ -23,6 +26,7 @@ public class BlogUserService implements UserServices{
         return userRepository.count( );
     }
     public void commentOnPostWith(CommentRequest commentRequest){
+        validateCommentRequest(commentRequest);
         postServices.findPostBy(commentRequest.getPostTitle());
         saveComment(commentRequest);
     }
@@ -110,6 +114,7 @@ public class BlogUserService implements UserServices{
         validateViewer(viewRequest);
     }
     private void saveComment(CommentRequest commentRequest){
+        validateCommentRequest(commentRequest);
         validateComment(commentRequest);
         User commenter = findUserBy(commentRequest.getCommenterUsername( ));
         commentRequest.setCommenter(commenter);
