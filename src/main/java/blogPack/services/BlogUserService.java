@@ -42,10 +42,11 @@ public class BlogUserService implements UserServices{
         return userRepository.findUserByUserName(posterUsername);
     }
     public ViewPostResponse viewPost(ViewRequest viewRequest){
-        User userGotten = findUserBy(viewRequest.getPosterUsername());
+//        User userGotten = findUserBy(viewRequest.getPosterUsername());
         validatePoster(viewRequest);
         validateViewer(viewRequest);
-        viewService.viewWith(viewRequest, userGotten);
+        User viewer = findUserBy(viewRequest.getViewerUsername());
+        viewService.viewWith(viewRequest, viewer);
         Post post = postServices.findPostBy(viewRequest.getPostTitle());
         List<Views> viewsList = viewService.getViewsWith(viewRequest);
         ViewPostResponse response = Mappers.mapPostResponse(post);
@@ -53,7 +54,7 @@ public class BlogUserService implements UserServices{
     }
 
     private void validateViewer(ViewRequest viewRequest){
-        findUserBy(viewRequest.getViewerUsername( ));
+    findUserBy(viewRequest.getViewerUsername());
     }
 
     public void savePost(PostRequest postRequest){

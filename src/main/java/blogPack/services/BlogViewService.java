@@ -30,7 +30,7 @@ public class BlogViewService implements ViewService{
         }
         return count;
     }
-    public void viewWith(ViewRequest viewRequest, User userGiven){
+public void viewWith(ViewRequest viewRequest, User userGiven){
         Views views = new Views();
         views.setViewer(userGiven);
         Mappers.mapView(views, viewRequest);
