@@ -372,7 +372,5 @@ public class UserServicesTest{
         assertThrows(UsernameAlreadyExistException.class, ()->userServices.createUser(finalRequest));
         assertEquals(1,userServices.countNumberOfUsers());
     }
-    //test post unique title for a user
     // test anonymous view
-    //test view post comes with comments and views
 }

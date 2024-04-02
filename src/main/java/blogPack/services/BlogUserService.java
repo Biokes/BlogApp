@@ -127,11 +127,9 @@ public class BlogUserService implements UserServices{
             throw new IncorrectPasswordException();
     }
     private void validateRegisterUsername(String username){
-        try{
-            findUserBy(username).getUserName( );
-        }catch(NullPointerException exception){
-            throw new UsernameAlreadyExistException();
-        }
+        for(User user : userRepository.findAll())
+            if(user.getUserName().equalsIgnoreCase(username))
+                throw new UsernameAlreadyExistException();
     }
     private UserRepository userRepository;
     private PostServices postServices;
