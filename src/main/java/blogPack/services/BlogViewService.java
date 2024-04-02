@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,14 +47,15 @@ public class BlogViewService implements ViewService{
     }
     private List<Views> findpostViews(DeleteViewRequest deleteViewRequest){
         List<Views> allViews= viewRepository.findAll();
+        List<Views> postViews = new ArrayList<>();
         for(Views view : allViews){
             if(view.getPosterUsername().equals(deleteViewRequest.getPosterUsername())
                        &&
                        view.getPostTitle().equalsIgnoreCase(deleteViewRequest.getPostTitle( ))){
-                allViews.add(view);
+                postViews.add(view);
             }
         }
-        return allViews;
+        return postViews;
     }
     private ViewRepository viewRepository;
 }
