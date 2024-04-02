@@ -4,6 +4,7 @@ import blogPack.data.model.Post;
 import blogPack.dto.*;
 import blogPack.exception.IncorrectPasswordException;
 import blogPack.exception.NoPostMatchException;
+import blogPack.exception.UsernameAlreadyExistException;
 import blogPack.services.CommentServices;
 import blogPack.services.PostServices;
 import blogPack.services.UserServices;
@@ -351,9 +352,26 @@ public class UserServicesTest{
         viewRequest.setPostTitle("post1");
         viewRequest.setViewerUsername("jamesHarden");
         ViewPostResponse response = userServices.viewPost(viewRequest);
+        System.out.println(response);
         assertEquals(1, response.getViewersCount());
     }
-    //test every userName is unique
+    @Test void createUserWithExistingUsername_testExceptionIsThrown(){
+        RegisterRequest request = new RegisterRequest();
+        request.setUserName("userName");
+        request.setFirstName("FirstName");
+        request.setLastName("LastName");
+        request.setPassword("my password");
+        userServices.createUser(request);
+        assertEquals(1,userServices.countNumberOfUsers());
+        request = new RegisterRequest();
+        request.setUserName("userName");
+        request.setFirstName("FirstName");
+        request.setLastName("LastName");
+        request.setPassword("my password");
+        RegisterRequest finalRequest = request;
+        assertThrows(UsernameAlreadyExistException.class, ()->userServices.createUser(finalRequest));
+        assertEquals(1,userServices.countNumberOfUsers());
+    }
     //test post unique title for a user
     // test anonymous view
     //test view post comes with comments and views

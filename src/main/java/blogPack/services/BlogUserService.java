@@ -45,7 +45,6 @@ public class BlogUserService implements UserServices{
         validate(viewRequest);
         Views views = new Views();
         views.setViewer(findUserBy(viewRequest.getViewerUsername()));
-        getAllViewsOnPost(viewRequest);
         return getAllViewsOnPost(viewRequest);
     }
     public void savePost(PostRequest postRequest){
@@ -80,9 +79,9 @@ public class BlogUserService implements UserServices{
     private ViewPostResponse getAllViewsOnPost(ViewRequest viewRequest){
         Post post = postServices.findPostBy(viewRequest.getPostTitle());
         User viewer = findUserBy(viewRequest.getViewerUsername());
+        viewService.viewWith(viewRequest, viewer);
         List<Views> viewsList = viewService.getViewsWith(viewRequest);
         ViewPostResponse response = Mappers.mapPostResponse(post);
-        viewService.viewWith(viewRequest, viewer);
         response.setViews(response.getViews());
         return Mappers.mapViewsWithResponse(viewsList, response);
     }
