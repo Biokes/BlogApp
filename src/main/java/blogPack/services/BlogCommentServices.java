@@ -56,6 +56,7 @@ public class BlogCommentServices implements CommentServices{
                 postComments.add(comment);
             }
         }
+        System.out.println(postComments.size( ));
         return postComments;
     }
     private void refresh(List<Comment> anything){

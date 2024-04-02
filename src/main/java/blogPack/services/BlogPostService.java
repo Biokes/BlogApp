@@ -44,6 +44,7 @@ public class BlogPostService implements PostServices{
     public void createPost(PostRequest postRequest){
         Post post = new Post();
         Mappers.mapPost(postRequest, post);
+        save(post);
     }
     public void updatePost(UpdatePostRequest updatePostRequest){
         Post postFound = findPostBy(updatePostRequest.getPostTitle());

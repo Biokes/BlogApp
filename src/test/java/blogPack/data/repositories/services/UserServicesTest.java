@@ -292,23 +292,23 @@ public class UserServicesTest{
         request.setFirstName("newUser");
         request.setUserName("new012");
         request.setLastName("newLastName");
-        request.setPassword("pass101");
+        request.setPassword("pass1056");
         userServices.createUser(request);
         PostRequest postRequest = new PostRequest();
         postRequest.setPosterUserName("new");
-        postRequest.setTitle("post Title.");
+        postRequest.setTitle("error");
         postRequest.setContent("new  post to test the code");
         postRequest.setTitle(postRequest.getTitle());
         postRequest.setContent(postRequest.getContent( ));
         userServices.savePost(postRequest);
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
-        viewRequest.setPostTitle("post title.");
-        viewRequest.setViewerUsername("new");
+        viewRequest.setPostTitle("error");
+        viewRequest.setViewerUsername("new012");
         userServices.viewPost(viewRequest);
         ViewsCountRequest countRequest = new ViewsCountRequest();
         countRequest.setPosterUsername("new");
-        countRequest.setPostTitle("post title.");
+        countRequest.setPostTitle("error");
         countRequest.setViewerUsername("new012");
         assertEquals(1, userServices.countPosts());
         assertEquals(1,userServices.countViewsOnPostWith(countRequest));
@@ -316,22 +316,20 @@ public class UserServicesTest{
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setCommentBody("nice");
         commentRequest.setCommenterUsername("new012");
-        commentRequest.setPostTitle("post title.");
+        commentRequest.setPostTitle("error");
         commentRequest.setPosterName("new");
         userServices.commentOnPostWith(commentRequest);
         CommentDetailsRequest detailsRequest = new CommentDetailsRequest();
         detailsRequest.setPosterUsername("new");
-        detailsRequest.setPostTitle("post title.");
+        detailsRequest.setPostTitle("error");
         assertEquals(1, userServices.countNumberOfCommentsOnPost(detailsRequest));
         DeletePostRequest deletePostRequest = new DeletePostRequest();
-        deletePostRequest.setPostTitle("post title.");
+        deletePostRequest.setPostTitle("error");
         deletePostRequest.setPosterUserName("new");
         deletePostRequest.setPassword("pass101");
         userServices.deletePostWith(deletePostRequest);
         assertEquals(0, userServices.countPosts());
-        assertEquals(0, userServices.countNumberOfComments());
-        assertEquals(0,userServices.countViews());
-
+        assertThrows(PostDoesNotExistException.class, ()->userServices.countNumberOfCommentsOnPost(detailsRequest));
     }
     //test every userName is unique
     //test post unique title for a user

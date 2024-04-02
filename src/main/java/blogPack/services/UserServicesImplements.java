@@ -57,6 +57,7 @@ public class UserServicesImplements implements UserServices{
         postServices.updatePost(updatePostRequest);
     }
     public long countNumberOfCommentsOnPost(CommentDetailsRequest commentDetailsRequest){
+        postServices.findPostBy(commentDetailsRequest.getPostTitle( ));
         return commentServices.countCommentsOnPost(
                 commentDetailsRequest.getPostTitle( ),
                 commentDetailsRequest.getPosterUsername()
