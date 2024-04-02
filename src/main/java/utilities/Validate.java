@@ -3,9 +3,15 @@ package utilities;
 import blogPack.dto.CommentDetailsRequest;
 import blogPack.dto.CommentRequest;
 import blogPack.dto.DeletePostRequest;
+import blogPack.dto.ViewRequest;
 import blogPack.exception.InvalidInputException;
 
 public class Validate{
+    public static void validateViewRequest(ViewRequest viewRequest){
+        validate(viewRequest.getPosterUsername());
+        validate(viewRequest.getPostTitle());
+        validate(viewRequest.getViewerUsername());
+    }
     public static void validateCommentDetailsRequest(CommentDetailsRequest commentDetails){
         validate(commentDetails.getPostTitle());
         validate(commentDetails.getPosterUsername());

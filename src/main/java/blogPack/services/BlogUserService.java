@@ -12,8 +12,7 @@ import utilities.Mappers;
 
 import java.util.List;
 
-import static utilities.Validate.validateCommentRequest;
-import static utilities.Validate.validateDeletePostRequest;
+import static utilities.Validate.*;
 
 @Service
 @AllArgsConstructor
@@ -45,6 +44,7 @@ public class BlogUserService implements UserServices{
         return userRepository.findUserByUserName(posterUsername);
     }
     public ViewPostResponse viewPost(ViewRequest viewRequest){
+        validateViewRequest(viewRequest);
         validate(viewRequest);
         Views views = new Views();
         views.setViewer(findUserBy(viewRequest.getViewerUsername()));
@@ -63,6 +63,7 @@ public class BlogUserService implements UserServices{
         postServices.updatePost(updatePostRequest);
     }
     public long countNumberOfCommentsOnPost(CommentDetailsRequest commentDetailsRequest){
+        validateCommentDetailsRequest(commentDetailsRequest);
         postServices.findPostBy(commentDetailsRequest.getPostTitle( ));
         return commentServices.countCommentsOnPost(
                 commentDetailsRequest.getPostTitle( ),
