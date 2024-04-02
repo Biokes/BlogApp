@@ -4,6 +4,7 @@ import blogPack.data.model.User;
 import blogPack.data.model.Views;
 import blogPack.data.repositories.UserRepository;
 import blogPack.data.repositories.ViewRepository;
+import blogPack.dto.DeleteCommentRequest;
 import blogPack.dto.DeleteViewRequest;
 import blogPack.dto.ViewRequest;
 import blogPack.dto.ViewsCountRequest;
@@ -38,15 +39,21 @@ public class BlogViewService implements ViewService{
         return viewRepository.findAll().size();
     }
     public void deleteViewsWith(DeleteViewRequest deleteViewRequest){
-        List<Views> allViews = viewRepository.findAll();
+        List<Views> allViews = findpostViews(deleteViewRequest);
+        for(Views view : allViews){
+            viewRepository.delete(view);
+        }
+    }
+    private List<Views> findpostViews(DeleteViewRequest deleteViewRequest){
+        List<Views> allViews= viewRepository.findAll();
         for(Views view : allViews){
             if(view.getPosterUsername().equals(deleteViewRequest.getPosterUsername())
-            &&
-            view.getPostTitle().equalsIgnoreCase(deleteViewRequest.getPostTitle( ))){
-                viewRepository.delete(view);
+                       &&
+                       view.getPostTitle().equalsIgnoreCase(deleteViewRequest.getPostTitle( ))){
+                allViews.add(view);
             }
-            allViews = viewRepository.findAll();
         }
+        return allViews;
     }
     private ViewRepository viewRepository;
 }

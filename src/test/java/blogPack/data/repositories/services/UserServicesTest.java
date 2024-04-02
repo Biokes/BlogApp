@@ -329,8 +329,8 @@ public class UserServicesTest{
         deletePostRequest.setPassword("pass101");
         userServices.deletePostWith(deletePostRequest);
         assertEquals(0, userServices.countPosts());
-        assertEquals(0, userServices.countNumberOfComments());
         assertEquals(0,userServices.countViews());
+        assertEquals(0, userServices.countNumberOfComments());
     }
     //test every userName is unique
     //test post unique title for a user
