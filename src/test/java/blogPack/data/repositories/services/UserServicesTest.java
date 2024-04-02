@@ -24,14 +24,12 @@ public class UserServicesTest{
     private PostServices postServices;
     @Autowired
     private CommentServices commentServices;
-    @BeforeEach
-    void wipe(){
+    @BeforeEach void wipe(){
         postServices.deleteAll( );
         userServices.deleteAll();
         commentServices.deleteAll();
     }
-    @Test
-    void createUser_testUserIsCreated(){
+    @Test void createUser_testUserIsCreated(){
         RegisterRequest request = new RegisterRequest();
         request.setUserName("userName");
         request.setFirstName("FirstName");
@@ -40,8 +38,7 @@ public class UserServicesTest{
         userServices.createUser(request);
         assertEquals(1,userServices.countNumberOfUsers());
     }
-    @Test
-    void commentOnPost_testPostIsCommentedOn(){
+    @Test void commentOnPost_testPostIsCommentedOn(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -72,8 +69,7 @@ public class UserServicesTest{
         userServices.commentOnPostWith(commentRequest);
         assertEquals(1, commentServices.countNumberOfComments());
     }
-    @Test
-    void commentOnPostThatIsNotCreated_testExceptionIsThrown(){
+    @Test void commentOnPostThatIsNotCreated_testExceptionIsThrown(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -89,8 +85,7 @@ public class UserServicesTest{
         assertEquals(0, postServices.countNumberOfPosts());
         assertThrows(PostDoesNotExistException.class, ()->userServices.commentOnPostWith(commentRequest));
     }
-    @Test
-    void viewPost_testPostIsViewed(){
+    @Test void viewPost_testPostIsViewed(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -116,8 +111,7 @@ public class UserServicesTest{
         viewCountRequest.setPosterUsername("new");
         assertEquals(1, userServices.countViewsOnPostWith(viewCountRequest));
     }
-    @Test
-    void viewPostWithWrongUsername_testExceptionIsThrown(){
+    @Test void viewPostWithWrongUsername_testExceptionIsThrown(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -134,8 +128,7 @@ public class UserServicesTest{
         viewCountRequest.setPosterUsername("userName");
         assertThrows(PostDoesNotExistException.class,()-> userServices.countViewsOnPostWith(viewCountRequest));
     }
-    @Test
-    void updatePost_testPostIsUpdated(){
+    @Test void updatePost_testPostIsUpdated(){
         RegisterRequest request = new RegisterRequest();
         request.setUserName("biokes");
         request.setFirstName("FirstName");
@@ -281,7 +274,7 @@ public class UserServicesTest{
         deletePostRequest.setPassword("pass101up");
         assertThrows(IncorrectPasswordException.class,()->userServices.deletePostWith(deletePostRequest));
     }
-    @Test void deletePost_testAllCommentsAndViewsOnPostAreDeleted(){
+    @Test void deletePost_testAllCommentsAndViewsOnPostAreNotAccesibleAgain(){
         RegisterRequest request= new RegisterRequest();
         request.setFirstName("newUser");
         request.setUserName("new");
@@ -330,6 +323,31 @@ public class UserServicesTest{
         userServices.deletePostWith(deletePostRequest);
         assertEquals(0, userServices.countPosts());
         assertThrows(PostDoesNotExistException.class, ()->userServices.countNumberOfCommentsOnPost(detailsRequest));
+    }
+    @Test void viewPost_postIsSeenWithCommentsAndNumberOfViews(){
+        RegisterRequest request= new RegisterRequest();
+        request.setFirstName("maya");
+        request.setUserName("maya");
+        request.setLastName("neville");
+        request.setPassword("1234567");
+        userServices.createUser(request);
+        request= new RegisterRequest();
+        request.setFirstName("james");
+        request.setUserName("jamesHarden");
+        request.setLastName("harden");
+        request.setPassword("12345");
+        userServices.createUser(request);
+        PostRequest postRequest = new PostRequest();
+        postRequest.setPosterUserName("new");
+        postRequest.setTitle("post1");
+        postRequest.setContent("contents of post 1");
+        userServices.savePost(postRequest);
+        ViewRequest viewRequest = new ViewRequest();
+        viewRequest.setPosterUsername("new");
+        viewRequest.setPostTitle("post1");
+        viewRequest.setViewerUsername("new012");
+        ViewPostResponse response = userServices.viewPost(viewRequest);
+        assertEquals(1, response.getViewersCount());
     }
     //test every userName is unique
     //test post unique title for a user

@@ -8,5 +8,5 @@ public class ViewPostResponse{
     private String postTitle;
     private String postbody;
     private LocalDate dateCreated;
-
+    private long viewersCount;
 }

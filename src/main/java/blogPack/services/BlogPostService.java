@@ -2,6 +2,7 @@ package blogPack.services;
 import blogPack.data.model.Post;
 import blogPack.data.repositories.PostRepositpory;
 import blogPack.dto.*;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import blogPack.exception.PostDoesNotExistException;
@@ -9,9 +10,8 @@ import utilities.Mappers;
 
 import java.util.List;
 @Service
+@AllArgsConstructor
 public class BlogPostService implements PostServices{
-    @Autowired
-    private PostRepositpory postRepositpory;
     public long countNumberOfPosts(){
         return postRepositpory.count();
     }
@@ -51,4 +51,5 @@ public class BlogPostService implements PostServices{
         postFound.setContent(updatePostRequest.getPostBody( ));
         save(postFound);
     }
+    private PostRepositpory postRepositpory;
 }

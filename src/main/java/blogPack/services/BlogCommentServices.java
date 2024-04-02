@@ -15,8 +15,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class BlogCommentServices implements CommentServices{
-    private CommentRepository commentRepository;
-    @Override
     public long countNumberOfComments(){
         return commentRepository.count();
     }
@@ -25,11 +23,9 @@ public class BlogCommentServices implements CommentServices{
         Mappers.mapComment(comment, commentRequest);
         commentRepository.save(comment);
     }
-    @Override
     public void deleteAll(){
         commentRepository.deleteAll();
     }
-
     public long countCommentsOnPost(String postTitle, String posterUsername){
         long count = 0;
         for(Comment comment : commentRepository.findAll()){
@@ -39,8 +35,6 @@ public class BlogCommentServices implements CommentServices{
         }
         return count;
     }
-
-    @Override
     public void deleteCommentsOnPost(DeleteCommentRequest deleteCommentRequest){
        List<Comment> commentList = findPostComments(deleteCommentRequest);
        for(Comment comment : commentList){
@@ -59,7 +53,6 @@ public class BlogCommentServices implements CommentServices{
         System.out.println(postComments.size( ));
         return postComments;
     }
-    private void refresh(List<Comment> anything){
-        anything = commentRepository.findAll();
-    }
+    private CommentRepository commentRepository;
+
 }
