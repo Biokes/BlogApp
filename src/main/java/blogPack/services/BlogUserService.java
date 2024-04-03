@@ -61,6 +61,7 @@ public class BlogUserService implements UserServices{
         return postServices.countNumberOfPosts();
     }
     public void updatePost(UpdatePostRequest updatePostRequest){
+        validateUpdatePostRequest(updatePostRequest);
         confirmUserDetails(updatePostRequest);
         postServices.updatePost(updatePostRequest);
     }

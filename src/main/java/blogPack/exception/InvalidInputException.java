@@ -2,6 +2,6 @@ package blogPack.exception;
 
 public class InvalidInputException extends BlogExceptions{
     public InvalidInputException(){
-        super("input Fields cannot be empty");
+        super("Input Fields cannot be empty");
     }
 }

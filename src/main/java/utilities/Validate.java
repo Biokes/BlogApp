@@ -4,6 +4,12 @@ import blogPack.dto.requests.*;
 import blogPack.exception.InvalidInputException;
 
 public class Validate{
+    public static void validateUpdatePostRequest(UpdatePostRequest request){
+        validate(request.getPosterPassword());
+        validate(request.getPostBody());
+        validate(request.getPostTitle());
+        validate(request.getPosterPassword());
+    }
     public static void validateRegisterRequest(RegisterRequest registerRequest){
         validate(registerRequest.getFirstName());
         validate(registerRequest.getPassword());
