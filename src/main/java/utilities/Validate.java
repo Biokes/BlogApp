@@ -1,12 +1,15 @@
 package utilities;
 
-import blogPack.dto.requests.CommentDetailsRequest;
-import blogPack.dto.requests.CommentRequest;
-import blogPack.dto.requests.DeletePostRequest;
-import blogPack.dto.requests.ViewRequest;
+import blogPack.dto.requests.*;
 import blogPack.exception.InvalidInputException;
 
 public class Validate{
+    public static void validateRegisterRequest(RegisterRequest registerRequest){
+        validate(registerRequest.getFirstName());
+        validate(registerRequest.getPassword());
+        validate(registerRequest.getUserName());
+        validate(registerRequest.getLastName());
+    }
     public static void validateViewRequest(ViewRequest viewRequest){
         validate(viewRequest.getPosterUsername());
         validate(viewRequest.getPostTitle());

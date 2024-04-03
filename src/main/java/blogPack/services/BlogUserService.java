@@ -19,6 +19,7 @@ import static utilities.Validate.*;
 @AllArgsConstructor
 public class BlogUserService implements UserServices{
     public void createUser(RegisterRequest registerRequest){
+        validateRegisterRequest(registerRequest);
         User user = new User();
         validateRegisterUsername(registerRequest.getUserName());
         userRepository.save(Mappers.mapRegister(user, registerRequest));
