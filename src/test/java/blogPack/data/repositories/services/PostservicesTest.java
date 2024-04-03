@@ -1,8 +1,8 @@
 package blogPack.data.repositories.services;
 
 import blogPack.data.model.Post;
-import blogPack.dto.DeletePostRequest;
-import blogPack.dto.PostRequest;
+import blogPack.dto.requests.DeletePostRequest;
+import blogPack.dto.requests.PostRequest;
 import blogPack.services.PostServices;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

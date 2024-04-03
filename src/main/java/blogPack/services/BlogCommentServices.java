@@ -2,8 +2,8 @@ package blogPack.services;
 
 import blogPack.data.model.Comment;
 import blogPack.data.repositories.CommentRepository;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.DeleteCommentRequest;
+import blogPack.dto.requests.CommentRequest;
+import blogPack.dto.requests.DeleteCommentRequest;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;

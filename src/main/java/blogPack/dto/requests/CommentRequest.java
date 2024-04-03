@@ -1,4 +1,4 @@
-package blogPack.dto;
+package blogPack.dto.requests;
 
 import blogPack.data.model.User;
 import lombok.Data;

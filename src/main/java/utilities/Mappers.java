@@ -4,7 +4,11 @@ import blogPack.data.model.Comment;
 import blogPack.data.model.Post;
 import blogPack.data.model.User;
 import blogPack.data.model.Views;
-import blogPack.dto.*;
+import blogPack.dto.requests.CommentRequest;
+import blogPack.dto.requests.PostRequest;
+import blogPack.dto.requests.RegisterRequest;
+import blogPack.dto.requests.ViewRequest;
+import blogPack.dto.response.ViewPostResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,7 +39,7 @@ public class Mappers{
         post.setPoster(postRequest.getPosterUserName( ));
         post.setContent(postRequest.getContent( ));
     }
-    public static ViewPostResponse  mapPostResponse(Post foundPost){
+    public static ViewPostResponse mapPostResponse(Post foundPost){
         ViewPostResponse response = new ViewPostResponse();
         response.setPostbody(foundPost.getContent());
         response.setPostTitle(foundPost.getTitle());

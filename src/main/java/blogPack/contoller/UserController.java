@@ -1,5 +1,6 @@
 package blogPack.contoller;
-import blogPack.dto.*;
+import blogPack.dto.requests.*;
+import blogPack.dto.response.ViewPostResponse;
 import blogPack.exception.BlogExceptions;
 import blogPack.services.UserServices;
 import lombok.AllArgsConstructor;

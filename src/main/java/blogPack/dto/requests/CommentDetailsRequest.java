@@ -1,10 +1,9 @@
-package blogPack.dto;
+package blogPack.dto.requests;
 
 import lombok.Data;
 
 @Data
-public class ViewsCountRequest{
+public class CommentDetailsRequest{
     private String postTitle;
-    private String viewerUsername;
     private String posterUsername;
 }

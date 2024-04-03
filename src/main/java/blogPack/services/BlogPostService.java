@@ -1,9 +1,10 @@
 package blogPack.services;
 import blogPack.data.model.Post;
 import blogPack.data.repositories.PostRepositpory;
-import blogPack.dto.*;
+import blogPack.dto.requests.DeletePostRequest;
+import blogPack.dto.requests.PostRequest;
+import blogPack.dto.requests.UpdatePostRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import blogPack.exception.PostDoesNotExistException;
 import utilities.Mappers;

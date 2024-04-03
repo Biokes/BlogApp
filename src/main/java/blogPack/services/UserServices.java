@@ -1,6 +1,7 @@
 package blogPack.services;
 import blogPack.data.model.User;
-import blogPack.dto.*;
+import blogPack.dto.requests.*;
+import blogPack.dto.response.ViewPostResponse;
 import org.springframework.stereotype.Service;
 @Service
 public interface UserServices{

@@ -1,9 +1,9 @@
 package utilities;
 
-import blogPack.dto.CommentDetailsRequest;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.DeletePostRequest;
-import blogPack.dto.ViewRequest;
+import blogPack.dto.requests.CommentDetailsRequest;
+import blogPack.dto.requests.CommentRequest;
+import blogPack.dto.requests.DeletePostRequest;
+import blogPack.dto.requests.ViewRequest;
 import blogPack.exception.InvalidInputException;
 
 public class Validate{

@@ -1,7 +1,9 @@
 package blogPack.services;
 
 import blogPack.data.model.Post;
-import blogPack.dto.*;
+import blogPack.dto.requests.DeletePostRequest;
+import blogPack.dto.requests.PostRequest;
+import blogPack.dto.requests.UpdatePostRequest;
 import org.springframework.stereotype.Service;
 
 @Service

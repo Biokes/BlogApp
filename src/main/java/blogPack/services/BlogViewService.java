@@ -2,14 +2,11 @@ package blogPack.services;
 
 import blogPack.data.model.User;
 import blogPack.data.model.Views;
-import blogPack.data.repositories.UserRepository;
 import blogPack.data.repositories.ViewRepository;
-import blogPack.dto.DeleteCommentRequest;
-import blogPack.dto.DeleteViewRequest;
-import blogPack.dto.ViewRequest;
-import blogPack.dto.ViewsCountRequest;
+import blogPack.dto.requests.DeleteViewRequest;
+import blogPack.dto.requests.ViewRequest;
+import blogPack.dto.requests.ViewsCountRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
 

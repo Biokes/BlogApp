@@ -2,9 +2,9 @@ package blogPack.services;
 
 import blogPack.data.model.User;
 import blogPack.data.model.Views;
-import blogPack.dto.DeleteViewRequest;
-import blogPack.dto.ViewRequest;
-import blogPack.dto.ViewsCountRequest;
+import blogPack.dto.requests.DeleteViewRequest;
+import blogPack.dto.requests.ViewRequest;
+import blogPack.dto.requests.ViewsCountRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,8 +1,7 @@
 package blogPack.services;
 
-import blogPack.data.model.Comment;
-import blogPack.dto.CommentRequest;
-import blogPack.dto.DeleteCommentRequest;
+import blogPack.dto.requests.CommentRequest;
+import blogPack.dto.requests.DeleteCommentRequest;
 import org.springframework.stereotype.Service;
 
 @Service

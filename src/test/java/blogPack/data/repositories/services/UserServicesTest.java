@@ -1,7 +1,8 @@
 package blogPack.data.repositories.services;
 
 import blogPack.data.model.Post;
-import blogPack.dto.*;
+import blogPack.dto.requests.*;
+import blogPack.dto.response.ViewPostResponse;
 import blogPack.exception.IncorrectPasswordException;
 import blogPack.exception.NoPostMatchException;
 import blogPack.exception.UsernameAlreadyExistException;
