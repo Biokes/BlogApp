@@ -21,14 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class UserServicesTest{
-    @Autowired
-    private UserServices userServices;
-    @Autowired
-    private PostServices postServices;
-    @Autowired
-    private CommentServices commentServices;
-    @Autowired
-    private ViewService viewService;
     @BeforeEach void wipe(){
         viewService.deleteAll();
         postServices.deleteAll( );
@@ -373,4 +365,12 @@ public class UserServicesTest{
         assertThrows(UsernameAlreadyExistException.class, ()->userServices.createUser(finalRequest));
         assertEquals(1,userServices.countNumberOfUsers());
     }
+    @Autowired
+    private UserServices userServices;
+    @Autowired
+    private PostServices postServices;
+    @Autowired
+    private CommentServices commentServices;
+    @Autowired
+    private ViewService viewService;
     }
