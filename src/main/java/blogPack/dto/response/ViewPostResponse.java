@@ -1,4 +1,4 @@
-package blogPack.dto;
+package blogPack.dto.response;
 
 import lombok.Data;
 

@@ -66,16 +66,16 @@ public class UserController{
             return error.getMessage();
         }
     }
-    @DeleteMapping("/delete-comment")
-    public String deleteComment(@RequestBody DeleteCommentRequest deleteComent){
-        try{
-            userServices.deleteComment(deleteComent);
-            return "deleted successfully";
-        }
-        catch(BlogExceptions error){
-            return error.getMessage();
-        }
-
-    }
+//    @DeleteMapping("/delete-comment")
+//    public String deleteComment(@RequestBody DeleteCommentRequest deleteComent){
+//        try{
+//            userServices.deleteComment(deleteComent);
+//            return "deleted successfully";
+//        }
+//        catch(BlogExceptions error){
+//            return error.getMessage();
+//        }
+//
+//    }
 }
 
