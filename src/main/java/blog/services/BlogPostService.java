@@ -4,6 +4,7 @@ import blog.data.repositories.PostRepositpory;
 import blog.dto.requests.DeletePostRequest;
 import blog.dto.requests.PostRequest;
 import blog.dto.requests.UpdatePostRequest;
+import blog.exception.PostDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import utilities.Mappers;
@@ -14,22 +15,22 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BlogPostService implements PostServices{
     public long countNumberOfPosts(){
-        return postRepositpory.count();
+        return postRepository.count();
     }
     public void save(Post post){
-        postRepositpory.save(post);
+        postRepository.save(post);
     }
     public void deleteAll(){
-        postRepositpory.deleteAll();
+        postRepository.deleteAll();
     }
     public void deletePost(DeletePostRequest deletePostRequest){
-        Optional<Post> postGotten = findPostBy(deletePostRequest.getPostTitle());
-        if( postGotten.isPresent()){
-            postRepositpory.delete(postGotten.get());
-            }
+        Post postGotten = findPostBy(deletePostRequest.getPostTitle()).get();
+            postRepository.delete(postGotten);
         }
     public Optional<Post> findPostBy(String postTitle){
-        return postRepositpory.findPostByTitle(postTitle);
+        if(postRepository.findPostByTitle(postTitle).isPresent())
+            return postRepository.findPostByTitle(postTitle);
+        throw new PostDoesNotExistException();
     }
     public void createPost(PostRequest postRequest){
         Post post = new Post();
@@ -44,5 +45,5 @@ public class BlogPostService implements PostServices{
             save(post);
         }
     }
-    private PostRepositpory postRepositpory;
+    private PostRepositpory postRepository;
 }
