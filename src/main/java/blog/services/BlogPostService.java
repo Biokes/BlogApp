@@ -6,10 +6,10 @@ import blog.dto.requests.PostRequest;
 import blog.dto.requests.UpdatePostRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import blog.exception.PostDoesNotExistException;
 import utilities.Mappers;
 
-import java.util.List;
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class BlogPostService implements PostServices{
@@ -23,18 +23,13 @@ public class BlogPostService implements PostServices{
         postRepositpory.deleteAll();
     }
     public void deletePost(DeletePostRequest deletePostRequest){
-        Post postGotten = findPostBy(deletePostRequest.getPostTitle());
-        postRepositpory.delete(postGotten);
-        }
-    public Post findPostBy(String postTitle){
-        Post foundPost = new Post();
-        List<Post> postList = postRepositpory.findAll();
-        for(Post post : postList) if(post.getTitle().equalsIgnoreCase(postTitle)){
-                foundPost = post;
-                break;
+        Optional<Post> postGotten = findPostBy(deletePostRequest.getPostTitle());
+        if( postGotten.isPresent()){
+            postRepositpory.delete((Post) postGotten.get());
             }
-        if(foundPost.getTitle() == null) throw new PostDoesNotExistException();
-     return foundPost;
+        }
+    public Optional<Post> findPostBy(String postTitle){
+        return postRepositpory.findPostByTitle(postTitle);
     }
     public void createPost(PostRequest postRequest){
         Post post = new Post();
@@ -42,9 +37,12 @@ public class BlogPostService implements PostServices{
         save(post);
     }
     public void updatePost(UpdatePostRequest updatePostRequest){
-        Post postFound = findPostBy(updatePostRequest.getPostTitle());
-        postFound.setContent(updatePostRequest.getPostBody( ));
-        save(postFound);
+        Optional<Post> postFound = findPostBy(updatePostRequest.getPostTitle());
+        if( postFound.isPresent()){
+            Post post = (Post) postFound.get();
+            post.setContent(updatePostRequest.getPostBody( ));
+            save(post);
+        }
     }
     private PostRepositpory postRepositpory;
 }
