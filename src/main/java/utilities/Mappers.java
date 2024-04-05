@@ -1,14 +1,14 @@
 package utilities;
 
-import blogPack.data.model.Comment;
-import blogPack.data.model.Post;
-import blogPack.data.model.User;
-import blogPack.data.model.Views;
-import blogPack.dto.requests.CommentRequest;
-import blogPack.dto.requests.PostRequest;
-import blogPack.dto.requests.RegisterRequest;
-import blogPack.dto.requests.ViewRequest;
-import blogPack.dto.response.ViewPostResponse;
+import blog.data.model.Comment;
+import blog.data.model.Post;
+import blog.data.model.User;
+import blog.data.model.Views;
+import blog.dto.requests.CommentRequest;
+import blog.dto.requests.PostRequest;
+import blog.dto.requests.RegisterRequest;
+import blog.dto.requests.ViewRequest;
+import blog.dto.response.ViewPostResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

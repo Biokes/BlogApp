@@ -1,7 +1,7 @@
 package utilities;
 
-import blogPack.dto.requests.*;
-import blogPack.exception.InvalidInputException;
+import blog.dto.requests.*;
+import blog.exception.InvalidInputException;
 
 public class Validate{
     public static void validateUpdatePostRequest(UpdatePostRequest request){
