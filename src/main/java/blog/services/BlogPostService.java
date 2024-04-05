@@ -25,7 +25,7 @@ public class BlogPostService implements PostServices{
     public void deletePost(DeletePostRequest deletePostRequest){
         Optional<Post> postGotten = findPostBy(deletePostRequest.getPostTitle());
         if( postGotten.isPresent()){
-            postRepositpory.delete((Post) postGotten.get());
+            postRepositpory.delete(postGotten.get());
             }
         }
     public Optional<Post> findPostBy(String postTitle){
@@ -39,7 +39,7 @@ public class BlogPostService implements PostServices{
     public void updatePost(UpdatePostRequest updatePostRequest){
         Optional<Post> postFound = findPostBy(updatePostRequest.getPostTitle());
         if( postFound.isPresent()){
-            Post post = (Post) postFound.get();
+            Post post = postFound.get();
             post.setContent(updatePostRequest.getPostBody( ));
             save(post);
         }
