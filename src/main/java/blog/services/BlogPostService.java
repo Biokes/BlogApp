@@ -23,14 +23,8 @@ public class BlogPostService implements PostServices{
         postRepositpory.deleteAll();
     }
     public void deletePost(DeletePostRequest deletePostRequest){
-        for(Post post : postRepositpory.findAll()){
-            if( post.getTitle().equalsIgnoreCase(deletePostRequest.getPostTitle( )) )
-                if( post.getPoster().equalsIgnoreCase(deletePostRequest.getPosterUserName( )) ){
-                    postRepositpory.delete(post);
-                    return;
-                }
-            }
-
+        Post postGotten = findPostBy(deletePostRequest.getPostTitle());
+        postRepositpory.delete(postGotten);
         }
     public Post findPostBy(String postTitle){
         Post foundPost = new Post();
