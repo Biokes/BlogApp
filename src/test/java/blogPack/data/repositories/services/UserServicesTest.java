@@ -1,5 +1,4 @@
 package blogPack.data.repositories.services;
-
 import blogPack.data.model.Post;
 import blogPack.dto.requests.*;
 import blogPack.dto.response.ViewPostResponse;
@@ -15,10 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import blogPack.exception.PostDoesNotExistException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 @SpringBootTest
 public class UserServicesTest{
     @BeforeEach void wipe(){
