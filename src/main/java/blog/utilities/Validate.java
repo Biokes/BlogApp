@@ -1,4 +1,4 @@
-package utilities;
+package blog.utilities;
 
 import blog.dto.requests.*;
 import blog.exception.InvalidInputException;

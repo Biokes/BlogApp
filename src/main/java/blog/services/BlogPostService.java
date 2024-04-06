@@ -7,7 +7,7 @@ import blog.dto.requests.UpdatePostRequest;
 import blog.exception.PostDoesNotExistException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import utilities.Mappers;
+import blog.utilities.Mappers;
 
 import java.util.Optional;
 

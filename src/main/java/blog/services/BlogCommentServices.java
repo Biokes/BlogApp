@@ -7,7 +7,7 @@ import blog.dto.requests.DeleteCommentRequest;
 import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
-import utilities.Mappers;
+import blog.utilities.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;

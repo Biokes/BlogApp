@@ -50,7 +50,7 @@ public class UserController{
             return new ResponseEntity<>(error.getMessage(), BAD_REQUEST);
         }
     }
-    @RequestMapping("/update-post")
+    @PatchMapping("/update-post")
     public ResponseEntity<?> updatePostRequest(@RequestBody UpdatePostRequest updatePostRequest){
         try{
             userServices.updatePost(updatePostRequest);
@@ -60,7 +60,7 @@ public class UserController{
             return new ResponseEntity<>(error.getMessage(), BAD_REQUEST);
         }
     }
-    @RequestMapping("/create-post")
+    @PatchMapping("/create-post")
     public ResponseEntity<?> createPost(@RequestBody PostRequest postRequest){
         try{
             userServices.savePost(postRequest);

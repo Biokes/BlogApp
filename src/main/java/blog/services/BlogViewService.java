@@ -8,7 +8,7 @@ import blog.dto.requests.ViewRequest;
 import blog.dto.requests.ViewsCountRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import utilities.Mappers;
+import blog.utilities.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;

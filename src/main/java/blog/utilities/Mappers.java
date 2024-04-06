@@ -1,4 +1,4 @@
-package utilities;
+package blog.utilities;
 
 import blog.data.model.Comment;
 import blog.data.model.Post;

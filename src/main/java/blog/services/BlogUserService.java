@@ -9,11 +9,11 @@ import blog.dto.response.ViewPostResponse;
 import blog.exception.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import utilities.Mappers;
+import blog.utilities.Mappers;
 
 import java.util.List;
 
-import static utilities.Validate.*;
+import static blog.utilities.Validate.*;
 
 @Service
 @AllArgsConstructor
