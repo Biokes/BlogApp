@@ -10,6 +10,5 @@ import java.util.Optional;
 @Repository
 public interface PostRepositpory extends MongoRepository<Post, String>{
     List<Post> findPostsByPoster(String posterName);
-    Optional<Post> findPostByTitle(String postTitle);
 
 }

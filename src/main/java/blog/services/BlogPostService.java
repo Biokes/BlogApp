@@ -28,8 +28,10 @@ public class BlogPostService implements PostServices{
             postRepository.delete(postGotten);
         }
     public Post findPostBy(String postTitle){
-        if(postRepository.findPostByTitle(postTitle).isPresent())
-            return postRepository.findPostByTitle(postTitle).get();
+        for(Post post : postRepository.findAll()){
+            if(post.getTitle().equalsIgnoreCase(postTitle))
+                return post;
+        }
         throw new PostDoesNotExistException();
     }
     public void createPost(PostRequest postRequest){
