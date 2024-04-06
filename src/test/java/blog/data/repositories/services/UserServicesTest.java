@@ -98,7 +98,7 @@ public class UserServicesTest{
         assertEquals(1, postServices.countNumberOfPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
-        viewRequest.setPostTitle("post title.");
+        viewRequest.setPostTitle("post Title.");
         viewRequest.setViewerUsername("new");
         userServices.viewPost(viewRequest);
         ViewsCountRequest viewCountRequest = new ViewsCountRequest();
@@ -202,7 +202,7 @@ public class UserServicesTest{
         assertEquals(1, userServices.countPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
-        viewRequest.setPostTitle("post title.");
+        viewRequest.setPostTitle("post Title.");
         viewRequest.setViewerUsername("new");
         userServices.viewPost(viewRequest);
         CommentRequest commentRequest = new CommentRequest();
@@ -245,7 +245,7 @@ public class UserServicesTest{
         assertEquals(1, userServices.countPosts());
         ViewRequest viewRequest = new ViewRequest();
         viewRequest.setPosterUsername("new");
-        viewRequest.setPostTitle("post title.");
+        viewRequest.setPostTitle("post Title.");
         viewRequest.setViewerUsername("new");
         userServices.viewPost(viewRequest);
         CommentRequest commentRequest = new CommentRequest();

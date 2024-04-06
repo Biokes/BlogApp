@@ -14,7 +14,7 @@ public interface PostServices{
     void save(Post post);
     void deleteAll();
     void deletePost(DeletePostRequest deletePostRequest);
-    Optional<Post> findPostBy(String postTitle);
+    Post findPostBy(String postTitle);
     void createPost(PostRequest postRequest);
     void updatePost(UpdatePostRequest updatePostRequest);
 }

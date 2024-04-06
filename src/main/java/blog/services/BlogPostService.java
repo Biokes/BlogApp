@@ -24,12 +24,12 @@ public class BlogPostService implements PostServices{
         postRepository.deleteAll();
     }
     public void deletePost(DeletePostRequest deletePostRequest){
-        Post postGotten = findPostBy(deletePostRequest.getPostTitle()).get();
+        Post postGotten = findPostBy(deletePostRequest.getPostTitle());
             postRepository.delete(postGotten);
         }
-    public Optional<Post> findPostBy(String postTitle){
+    public Post findPostBy(String postTitle){
         if(postRepository.findPostByTitle(postTitle).isPresent())
-            return postRepository.findPostByTitle(postTitle);
+            return postRepository.findPostByTitle(postTitle).get();
         throw new PostDoesNotExistException();
     }
     public void createPost(PostRequest postRequest){
@@ -38,12 +38,9 @@ public class BlogPostService implements PostServices{
         save(post);
     }
     public void updatePost(UpdatePostRequest updatePostRequest){
-        Optional<Post> postFound = findPostBy(updatePostRequest.getPostTitle());
-        if( postFound.isPresent()){
-            Post post = postFound.get();
-            post.setContent(updatePostRequest.getPostBody( ));
-            save(post);
-        }
+        Post postFound = findPostBy(updatePostRequest.getPostTitle());
+            postFound.setContent(updatePostRequest.getPostBody( ));
+            save(postFound);
     }
     private PostRepositpory postRepository;
 }

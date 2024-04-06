@@ -85,17 +85,13 @@ public class BlogUserService implements UserServices{
         return viewService.count();
     }
     private ViewPostResponse getAllViewsOnPost(ViewRequest viewRequest){
-        Post post;
-        if(postServices.findPostBy(viewRequest.getPostTitle()).isPresent()){
-            post=postServices.findPostBy(viewRequest.getPostTitle( )).get( );
+        Post post = postServices.findPostBy(viewRequest.getPostTitle());
             User viewer=findUserBy(viewRequest.getViewerUsername( ));
             viewService.viewWith(viewRequest, viewer);
             List<Views> viewsList=viewService.getViewsWith(viewRequest);
             ViewPostResponse response=Mappers.mapPostResponse(post);
             response.setViews(response.getViews( ));
             return Mappers.mapViewsWithResponse(viewsList, response);
-        }
-        throw new PostDoesNotExistException();
     }
     private void validateViewer(ViewRequest viewRequest){
         findUserBy(viewRequest.getViewerUsername());
